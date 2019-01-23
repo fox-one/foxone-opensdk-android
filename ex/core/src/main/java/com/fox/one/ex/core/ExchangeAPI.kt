@@ -1,7 +1,6 @@
 package com.fox.one.ex.core
 
 import com.fox.one.ex.core.model.*
-import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.support.framework.network.HttpEngine
@@ -77,8 +76,8 @@ object ExchangeAPI: IExchangeAPI {
     private val apiloader = APILoader()
 
     const val ALPHA_URL = "https://dev-gateway.fox.one"
-    const val BETA_URL = "https://dev-gateway.fox.one"
-    const val RELEASE_URL = "https://dev-gateway.fox.one"
+    const val BETA_URL = "https://gateway.fox.one"
+    const val RELEASE_URL = "https://gateway.fox.one"
 
     var apiLoader = APILoader()
 
