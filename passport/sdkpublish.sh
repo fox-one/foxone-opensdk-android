@@ -5,7 +5,7 @@ echo "start sdk packaging and publishing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PROJECT_PATH=`pwd`
 echo "project dir:: ${PROJECT_PATH}"
 
-for m in utils components framework resources account_core account assets_core assets market_core market opensdk; do
+for m in core cloud; do
     curPath="${PROJECT_PATH}/${m}"
     echo "now working at ${curPath} --------------"
 

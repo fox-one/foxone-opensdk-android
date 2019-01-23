@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+
 
 android {
     compileSdkVersion 28
@@ -20,12 +24,15 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -34,7 +41,16 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
+    implementation 'com.fox.one:support-common:0.0.4'
+    implementation 'com.fox.one:support-framework:0.0.4'
+
+    api 'io.jsonwebtoken:jjwt-api:0.10.5'
+    api 'io.jsonwebtoken:jjwt-impl:0.10.5'
+    api 'io.jsonwebtoken:jjwt-orgjson:0.10.5'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply from: '../bintray.gradle'
