@@ -32,9 +32,6 @@ object FoxSDK {
             LogUtils.enable(it.logEnable)
         }
 
-        APILoader.defaultBaseUrl = APILoader.BaseUrl("https://dev-cloud.fox.one", "https://dev-cloud.fox.one", "https://dev-cloud.fox.one")
-        LogUtils.i("foxone", "FoxSDK.init(..)")
-
         HttpEngine.defaultInterceptor = Interceptor {
             val request = it.request()
 

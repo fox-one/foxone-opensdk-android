@@ -21,15 +21,20 @@ import java.net.URL
  * @since 2019-01-21
  */
 object PassportAPI: IPassportAPI, IKYCAPI {
+    const val ALPHA_URL = "https://dev-cloud.fox.one"
+    const val BETA_URL = "https://dev-cloud.fox.one"
+    const val RELEASE_URL = "https://dev-cloud.fox.one"
+
     var accountInfo: AccountInfo = AccountInfo()
     var apiLoader = APILoader()
 
     init {
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor).build()
+            .addInterceptor(HttpEngine.defaultInterceptor)
+            .build()
 
         apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.defaultBaseUrl)
+        apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
     }
 
     fun isLogin(): Boolean {

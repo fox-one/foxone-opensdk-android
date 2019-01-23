@@ -21,7 +21,7 @@ object UploadAPI: IUploadAPI {
     private val apiLoader = APILoader()
 
     init {
-        apiLoader.setBaseUri(APILoader.defaultBaseUrl)
+        apiLoader.setBaseUri(APILoader.BaseUrl(PassportAPI.ALPHA_URL, PassportAPI.BETA_URL, PassportAPI.RELEASE_URL))
     }
 
     /**
