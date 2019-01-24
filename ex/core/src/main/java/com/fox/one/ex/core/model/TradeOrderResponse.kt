@@ -1,5 +1,6 @@
 package com.fox.one.ex.core.model
 
+import com.fox.one.pay.core.model.Pagination
 import com.google.gson.annotations.SerializedName
 
 /**

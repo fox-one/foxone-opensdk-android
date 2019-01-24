@@ -41,8 +41,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
-    implementation 'com.fox.one:support-common:0.0.4'
-    implementation 'com.fox.one:support-framework:0.0.4'
+    implementation 'com.fox.one:support-common:0.0.5'
+    implementation 'com.fox.one:support-framework:0.0.5'
 
     api 'io.jsonwebtoken:jjwt-api:0.10.5'
     api 'io.jsonwebtoken:jjwt-impl:0.10.5'

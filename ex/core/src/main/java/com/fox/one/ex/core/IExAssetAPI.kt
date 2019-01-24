@@ -1,6 +1,6 @@
 package com.fox.one.ex.core
 
-import com.fox.one.ex.core.model.*
+import com.fox.one.pay.core.model.*
 import com.fox.one.support.framework.network.FoxCall
 import retrofit2.http.*
 

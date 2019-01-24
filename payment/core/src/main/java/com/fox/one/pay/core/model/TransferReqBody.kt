@@ -13,21 +13,21 @@ data class TransferReqBody(
     /**
      * UUID
      */
-    @SerializedName("trace_id") val traceId: String,
+    @SerializedName("trace_id") var traceId: String,
     /**
      * 转账数量
      */
-    @SerializedName("amount") val amount: String,
+    @SerializedName("amount") var amount: String,
     /**
      * 资产ID
      */
-    @SerializedName("asset_id") val assetId: String,
+    @SerializedName("asset_id") var assetId: String,
     /**
      * 备注，对于eos来说, memo 即是[AssetInfo.accountTag]
      */
-    @SerializedName("memo") val memo: String,
+    @SerializedName("memo") var memo: String,
 
-    @SerializedName("opponent_id") val opponentId: String,
-    @SerializedName("member_id") val memberId: String): Serializable {
+    @SerializedName("opponent_id") var opponentId: String,
+    @SerializedName("member_id") var memberId: String): Serializable {
 
 }

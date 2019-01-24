@@ -11,42 +11,42 @@ import java.text.DecimalFormat
  * @since 2018-11-23
  */
 data class AssetInfo(
-    @SerializedName("asset_id") val assetId: String,
-    @SerializedName("balance") val balance: Double,
+    @SerializedName("asset_id") var assetId: String?,
+    @SerializedName("balance") var balance: Double,
     /**
      * 资产价格，以CNY为计价单位
      */
     @SerializedName("price") var price: Double = 0.0,
-    @SerializedName("transaction_amount") val transactionAmount: Double,
-    @SerializedName("transaction_count") val transactionCount: Double,
-    @SerializedName("asset") val basic: AssetBasic,
-    @SerializedName("address") val address: Address): Serializable {
+    @SerializedName("transaction_amount") var transactionAmount: Double,
+    @SerializedName("transaction_count") var transactionCount: Double,
+    @SerializedName("asset") var basic: AssetBasic?,
+    @SerializedName("address") var address: Address?): Serializable {
     constructor(): this("", 0.0, 0.0, 0.0, 0.0, AssetBasic(), Address())
 
     fun isEOS(): Boolean {
-        return basic.symbol == "EOS"
+        return basic?.symbol == "EOS"
     }
 
     data class AssetBasic(
-        @SerializedName("asset_id") val assetId: String,
-        @SerializedName("asset_key") val assetKey: String,
-        @SerializedName("chain_id") val chainId: String,
-        @SerializedName("name") val name: String,
-        @SerializedName("symbol") val symbol: String,
-        @SerializedName("icon_url") val icon: String,
-        @SerializedName("precision") val precision: Int = 0
+        @SerializedName("asset_id") var assetId: String?,
+        @SerializedName("asset_key") var assetKey: String?,
+        @SerializedName("chain_id") var chainId: String?,
+        @SerializedName("name") var name: String?,
+        @SerializedName("symbol") var symbol: String?,
+        @SerializedName("icon_url") var icon: String?,
+        @SerializedName("precision") var precision: Int = 0
     ): Serializable {
         constructor(): this("", "", "", "", "", "")
     }
 
     data class Address(
-        @SerializedName("user_id") val userId: String,
-        @SerializedName("chain_id") val chainId: String,
-        @SerializedName("public_key") val publicKey: String,
-        @SerializedName("account_name") val accountName: String,
-        @SerializedName("account_tag") val accountTag: String,
-        @SerializedName("confirmations") val confirmations: Double,
-        @SerializedName("capitalization") val capitalization: Double
+        @SerializedName("user_id") var userId: String?,
+        @SerializedName("chain_id") var chainId: String?,
+        @SerializedName("public_key") var publicKey: String?,
+        @SerializedName("account_name") var accountName: String?,
+        @SerializedName("account_tag") var accountTag: String?,
+        @SerializedName("confirmations") var confirmations: Double,
+        @SerializedName("capitalization") var capitalization: Double
     ): Serializable {
         constructor(): this("","", "", "", "", 0.0, 0.0)
     }

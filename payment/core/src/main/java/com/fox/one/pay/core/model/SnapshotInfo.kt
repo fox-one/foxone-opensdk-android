@@ -10,19 +10,19 @@ import java.io.Serializable
  * @since 2018-12-01
  */
 data class SnapshotInfo(
-    @SerializedName("snapshot_id") val snapshotId: String?,
-    @SerializedName("trace_id") val traceId: String?,
-    @SerializedName("wallet_id") val walletId: String?,
-    @SerializedName("asset_id") val assetId: String?,
-    @SerializedName("opponent_id") val opponentId: String?,
-    @SerializedName("source") val source: String?,
-    @SerializedName("memo") val memo: String?,
-    @SerializedName("member_id") val memberId: String?,
-    @SerializedName("service") val service: String?,
-    @SerializedName("label") val label: String?,
-    @SerializedName("data") val data: Any?,
-    @SerializedName("created_at") val createdAt: Long,
-    @SerializedName("amount") val amount: Double,
-    @SerializedName("asset") val asset: AssetInfo.AssetBasic?): Serializable {
+    @SerializedName("snapshot_id") var snapshotId: String?,
+    @SerializedName("trace_id") var traceId: String?,
+    @SerializedName("wallet_id") var walletId: String?,
+    @SerializedName("asset_id") var assetId: String?,
+    @SerializedName("opponent_id") var opponentId: String?,
+    @SerializedName("source") var source: String?,
+    @SerializedName("memo") var memo: String?,
+    @SerializedName("member_id") var memberId: String?,
+    @SerializedName("service") var service: String?,
+    @SerializedName("label") var label: String?,
+    @SerializedName("data") var data: Any?,
+    @SerializedName("created_at") var createdAt: Long,
+    @SerializedName("amount") var amount: Double,
+    @SerializedName("asset") var asset: AssetInfo.AssetBasic?): Serializable {
     constructor(): this("", "", "", "", "","", "", "", "", "", null, 0L, 0.0, AssetInfo.AssetBasic())
 }

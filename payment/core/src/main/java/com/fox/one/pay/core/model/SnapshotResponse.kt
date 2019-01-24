@@ -11,5 +11,5 @@ import com.google.gson.annotations.SerializedName
 class SnapshotResponse: PayBaseResponse() {
 
     @SerializedName("snapshot")
-    val snapshot: SnapshotInfo? = SnapshotInfo()
+    var snapshot: SnapshotInfo? = SnapshotInfo()
 }

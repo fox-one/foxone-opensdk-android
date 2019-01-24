@@ -1,6 +1,7 @@
 package com.fox.one.ex.core.model
 
 import com.fox.one.ex.core.model.ExBaseResponse
+import com.fox.one.pay.core.model.SnapshotInfo
 import com.google.gson.annotations.SerializedName
 
 /**

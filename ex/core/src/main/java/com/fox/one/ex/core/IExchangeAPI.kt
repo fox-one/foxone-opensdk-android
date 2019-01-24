@@ -1,6 +1,7 @@
 package com.fox.one.ex.core
 
 import com.fox.one.ex.core.model.*
+import com.fox.one.pay.core.model.AssetInfo
 import com.fox.one.support.framework.network.FoxCall
 import retrofit2.http.*
 
@@ -65,13 +66,13 @@ interface IExchangeAPI {
     /**
      * 下单
      */
-    @POST("api/order")
+    @POST("/member/exchange/order")
     fun placeOrder(@Body request: PlaceOrderReqBody): FoxCall<OrderOpResponse>
 
     /**
      * 撤单
      */
-    @DELETE("api/order/{orderId}")
+    @DELETE("/member/exchange/order/{orderId}")
     fun cancelOrder(@Path("orderId") orderId: String): FoxCall<OrderOpResponse>
 
     /**

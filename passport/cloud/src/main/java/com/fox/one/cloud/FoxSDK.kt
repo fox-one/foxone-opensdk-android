@@ -2,12 +2,15 @@ package com.fox.one.cloud
 
 import android.app.Application
 import com.fox.one.passport.core.PassportAPI
+import com.fox.one.pay.core.rate.CurrencyRateManager
 import com.fox.one.support.common.extension.closeSilently
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.framework.APPLifeCycleManager
+import com.fox.one.support.framework.AppLifecycleCallback
 import com.fox.one.support.framework.Enviroment
 import com.fox.one.support.framework.FoxRuntime
-import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.HttpEngine
+import com.fox.one.support.framework.network.HttpErrorHandler
 import okhttp3.Interceptor
 import okio.Buffer
 import java.io.Serializable
@@ -26,12 +29,14 @@ object FoxSDK {
     fun init(application: Application, merchantId: String, options: Options?) {
         FoxRuntime.init(application)
 
+        // config options
         options?.let {
             FoxRuntime.debug = it.debugEnable
             FoxRuntime.env = it.env
             LogUtils.enable(it.logEnable)
         }
 
+        //init http engine default interceptor
         HttpEngine.defaultInterceptor = Interceptor {
             val request = it.request()
 
@@ -57,6 +62,20 @@ object FoxSDK {
 
             return@Interceptor it.proceed(newRequestBuilder.build())
         }
+
+        //init app life cycle
+        APPLifeCycleManager.registAppLifecycleCallback(object: AppLifecycleCallback {
+            override fun onAppGoToBackGround() {
+                CurrencyRateManager.stopSync()
+            }
+
+            override fun onAppGoToForeGround() {
+                CurrencyRateManager.startSync()
+            }
+        })
+
+        //init Currency rate manager
+        CurrencyRateManager.init(application)
     }
 
     private const val HEADER_MERCHANT_ID = "fox-cloud-merchant-id"
