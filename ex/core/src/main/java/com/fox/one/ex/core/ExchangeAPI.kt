@@ -64,12 +64,12 @@ object ExchangeAPI: IExchangeAPI {
             .getOrders(symbol, state, cursor, limit)
     }
 
-    override fun getOrderInfo(orderId: String): FoxCall<Any> {
+    override fun getOrderInfo(orderId: String): FoxCall<TradeOrderInfo> {
         return apiloader.load(IExchangeAPI::class.java)
             .getOrderInfo(orderId)
     }
 
-    override fun getTradeInfoOfOrder(orderId: String): FoxCall<Any> {
+    override fun getTradeInfoOfOrder(orderId: String): FoxCall<List<TradeHistoryInfo>> {
         return apiloader.load(IExchangeAPI::class.java)
             .getTradeInfoOfOrder(orderId)
     }

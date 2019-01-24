@@ -86,8 +86,8 @@ interface IExchangeAPI {
     fun getOrders(@Query("symbol") symbol: String?, @Query("state") state: String?, @Query("cursor") cursor: String? = null, @Query("limit") limit: Int = 20): FoxCall<TradeOrderResponse>
 
     @GET("/member/exchange/order/{orderId}")
-    fun getOrderInfo(orderId: String): FoxCall<Any>
+    fun getOrderInfo(orderId: String): FoxCall<TradeOrderInfo>
 
     @GET("/member/exchange/order/{orderId}/trades")
-    fun getTradeInfoOfOrder(orderId: String): FoxCall<Any>
+    fun getTradeInfoOfOrder(orderId: String): FoxCall<List<TradeHistoryInfo>>
 }

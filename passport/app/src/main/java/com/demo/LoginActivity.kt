@@ -11,6 +11,7 @@ import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.passport.core.model.LoginWithPhoneReqBody
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.framework.network.HttpErrorHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,22 +33,15 @@ class LoginActivity: AppCompatActivity() {
             val phone = findViewById<EditText>(R.id.edt_phone).text.toString()
             val pwd = findViewById<EditText>(R.id.edt_password).text.toString()
 
-            PassportAPI.login(
-                LoginWithPhoneReqBody(
-                    countryCode = "86",
-                    phoneNumber = phone,
-                    password = pwd
-                )
-            ).enqueue(object: Callback<AccountInfo> {
+            PassportAPI.login(LoginWithPhoneReqBody(countryCode = "86", phoneNumber = phone, password = pwd))
+                .enqueue(object: Callback<AccountInfo> {
                 override fun onFailure(call: Call<AccountInfo>, t: Throwable) {
                     LogUtils.i("foxone", "${t.toString()}")
+                    HttpErrorHandler.handle(t)
                 }
 
                 override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
-                    DemoApp.onLogin(
-                        this@LoginActivity,
-                        response.body() ?: AccountInfo()
-                    )
+                    DemoApp.onLogin(this@LoginActivity, response.body() ?: AccountInfo())
                     LogUtils.i("foxone", "login::${JsonUtils.optToJson(response.body())}")
                 }
             })

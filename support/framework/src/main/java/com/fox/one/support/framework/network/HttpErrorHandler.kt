@@ -14,6 +14,7 @@ import retrofit2.HttpException
 object HttpErrorHandler {
     private var errorHintMap: MutableMap<Int, Int> = mutableMapOf()
     private var errorListener: MutableMap<Int, ErrorListener> = mutableMapOf()
+    private var httpCodeListener: MutableMap<Int, ErrorListener> = mutableMapOf()
 
     var networkErrorToast: String = ""
 
@@ -31,6 +32,10 @@ object HttpErrorHandler {
         errorListener[errorCode] = listener
     }
 
+    fun addHttpCodeListener(httpCode: Int, listener: ErrorListener) {
+        httpCodeListener[httpCode] = listener
+    }
+
     fun handle(it: Throwable?): Boolean {
         return handle(it, null)
     }
@@ -42,17 +47,18 @@ object HttpErrorHandler {
         }
 
         if (it is HttpException) {
-            it.response().errorBody()
             val json = it.response().errorBody()?.string()
             if (!TextUtils.isEmpty(json)) {
                 val errorResponse = JsonUtils.optFromJson<ErrorResponse>(json!!, ErrorResponse::class.java)
 
-                val resId = errorHintMap[errorResponse?.code] ?: 0
-                val hint = if (resId > 0) FoxRuntime.application.getString(resId) else null
-
-                if (errorListener[errorResponse?.code ?: 0] != null) {
+                if (httpCodeListener[it.response().code()] != null) {
+                    httpCodeListener[it.response().code()]?.onError(it.response().code(), errorResponse)
+                } else if (errorListener[errorResponse?.code ?: 0] != null) {
                     errorListener[errorResponse?.code ?: 0]?.onError(it.response().code(), errorResponse)
                 } else {
+                    val resId = errorHintMap[errorResponse?.code] ?: 0
+                    val hint = if (resId > 0) FoxRuntime.application.getString(resId) else null
+
                     if (listener == null) {
                         if (TextUtils.isEmpty(hint)) {
                             ToastUtil.show(FoxRuntime.application, errorResponse?.hint ?: errorResponse?.msg ?: "")
