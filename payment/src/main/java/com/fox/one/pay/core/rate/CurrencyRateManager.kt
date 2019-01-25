@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import com.fox.one.pay.core.model.Currency
+import com.fox.one.support.framework.Currency
 import com.fox.one.pay.core.model.CurrencyTicker
 import com.fox.one.support.framework.network.APILoader
 import retrofit2.Call

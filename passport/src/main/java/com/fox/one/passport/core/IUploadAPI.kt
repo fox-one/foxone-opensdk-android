@@ -17,6 +17,6 @@ import retrofit2.http.Part
 interface IUploadAPI {
 
     @Multipart
-    @PUT("/api/upload")
+    @PUT("/api/file")
     fun uploadFile(@Part file: MultipartBody.Part): FoxCall<UploadResponse>
 }

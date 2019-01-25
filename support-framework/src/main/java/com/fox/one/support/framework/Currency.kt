@@ -1,4 +1,4 @@
-package com.fox.one.pay.core.model
+package com.fox.one.support.framework
 
 /**
  * class description here
