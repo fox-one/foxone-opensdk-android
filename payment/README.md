@@ -12,7 +12,7 @@ implementation 'com.fox.one:pay:0.0.4'
 
 ## 功能
 
-* **[PayAPI](core/src/main/java/com/fox/one/pay/core/PayAPI.kt)**
+* **[PayAPI](src/main/java/com/fox/one/pay/core/PayAPI.kt)**
 
 ```
 //获取用户数字资产列表
@@ -34,7 +34,7 @@ withdraw(..)
 transfer(..)
 ```
 
-* **CurrencyRateManager** 汇率接口，注意所有法币和数字货币的汇率都是以人民币(CNY)为基准进行计算得出的
+* **[CurrencyRateManager](src/main/java/com/fox/one/pay/core/rate/CurrencyRateManager.kt)** 汇率接口，注意所有法币和数字货币的汇率都是以人民币(CNY)为基准进行计算得出的
 
 ```
 //获取对应symbol的汇率

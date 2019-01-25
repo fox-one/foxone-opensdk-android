@@ -48,8 +48,8 @@ PassportAPI.login(LoginWithPhoneReqBody(countryCode = "86", phoneNumber = phone,
             })
 ```
 
-* **[错误码](passport/cloud/src/main/java/com/fox/one/cloud/ErrorCode.kt)**
-* **异常处理** [HttpErrorHandler](support/framework/src/main/java/com/fox/one/support/framework/network/HttpErrorHandler.kt)
+* **[错误码](cloud/src/main/java/com/fox/one/cloud/ErrorCode.kt)**
+* **异常处理** [HttpErrorHandler](support-framework/src/main/java/com/fox/one/support/framework/network/HttpErrorHandler.kt)
 
 ```
 //绑定错误码对应的提示文本

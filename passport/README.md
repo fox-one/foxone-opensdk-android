@@ -12,7 +12,7 @@ implementation 'com.fox.one:passport:0.0.7'
 
 ## 功能说明
 
-* [PassportAPI](core/src/main/java/com/fox/one/passport/core/PassportAPI.kt)
+* [PassportAPI](src/main/java/com/fox/one/passport/core/PassportAPI.kt)
 
 ```
 //请求图片验证码
@@ -65,7 +65,7 @@ sign
 
 ```
 
-* [文件上传API](core/src/main/java/com/fox/one/passport/core/UploadAPI.kt) 目前用于KYC用户证件照上传
+* [文件上传API](src/main/java/com/fox/one/passport/core/UploadAPI.kt) 目前用于KYC用户证件照上传
 
 ```
 UploadAPI.uploadFile(UploadAPI.createUploadReqBody(File))

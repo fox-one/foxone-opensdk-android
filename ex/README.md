@@ -12,7 +12,7 @@ implementation 'com.fox.one:ex:0.0.7'
 
 ## 功能
 
-* **[ExAssetAPI]()** 交易钱包
+* **[ExAssetAPI](src/main/java/com/fox/one/ex/core/ExAssetAPI.kt)** 交易钱包
 
 ```
 //获取钱包所有资产
@@ -34,7 +34,7 @@ withdraw
 transfer
 ```
 
-* **[ExchangeAPI]()** 币对行情&交易功能
+* **[ExchangeAPI](src/main/java/com/fox/one/ex/core/ExchangeAPI.kt)** 币对行情&交易功能
 
 ```
 //获取所有交易对
@@ -75,7 +75,7 @@ getTradeInfoOfOrder
 
 ```
 
-* **[ExFavAPI]()** 用户收藏功能
+* **[ExFavAPI](src/main/java/com/fox/one/ex/core/ExFavAPI.kt)** 用户收藏功能
 
 ```
 //获取收藏的币对
@@ -88,7 +88,7 @@ like
 dislike
 ```
 
-* **[StreamDataManager]()** 实时数据流
+* **[StreamDataManager](src/main/java/com/fox/one/ex/core/stream/StreamDataManager.kt)** 实时数据流
 
 ```
 //定义K线数据
@@ -127,6 +127,6 @@ subscribe(observer: OrderStreamObserver)
 unsubscribe(orderRequest: OrderStreamReqBody)
 ```
 
-* **[TradeSide]()** 交易方向，BID：买方，ASK：卖方
-* **[TradeState]()** 交易状态，PENDING：挂单中，DONE：交易完成
-* **[TradeType]()** 交易类型，LIMIT：限价交易，MARKET：市价交易
+* **[TradeSide](src/main/java/com/fox/one/ex/core/TradeSide.kt)** 交易方向，BID：买方，ASK：卖方
+* **[TradeState](src/main/java/com/fox/one/ex/core/TradeState.kt)** 交易状态，PENDING：挂单中，DONE：交易完成
+* **[TradeType](src/main/java/com/fox/one/ex/core/TradeType.kt)** 交易类型，LIMIT：限价交易，MARKET：市价交易
