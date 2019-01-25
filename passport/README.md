@@ -71,7 +71,3 @@ sign
 UploadAPI.uploadFile(UploadAPI.createUploadReqBody(File))
 
 ```
-
-
-
-## 版本日志

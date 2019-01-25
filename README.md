@@ -191,3 +191,8 @@ networkErrorToast
 
 
 ### 注：文档中提到的相关SDK的版本可能比较低，建议接入[最新版本](http://jcenter.bintray.com/com/fox/one/)
+
+## 版本日志
+
+### 0.1.0
+* first release SDK: `payment`,`ex`,`cloud`
