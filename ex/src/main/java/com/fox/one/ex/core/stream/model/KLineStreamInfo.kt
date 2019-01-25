@@ -18,5 +18,5 @@ data class KLineStreamInfo(
                       @SerializedName("c") var current: Double,
                       @SerializedName("v") var volume: Double,
                       @SerializedName("V") var quoVolume: Double,
-                      @SerializedName("i") var intervar: String): BaseStreamInfo {
+                      @SerializedName("i") var interval: String): BaseStreamInfo {
 }

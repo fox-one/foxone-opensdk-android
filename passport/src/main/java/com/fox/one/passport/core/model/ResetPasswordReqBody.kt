@@ -14,7 +14,7 @@ data class ResetPasswordReqBody(
     /**
      * request token
      */
-    @SerializedName("token") val countryCode: String,
+    @SerializedName("token") val token: String,
     /**
      * 密码
      */

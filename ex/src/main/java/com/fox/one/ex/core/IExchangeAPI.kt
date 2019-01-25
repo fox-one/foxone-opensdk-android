@@ -35,6 +35,7 @@ interface IExchangeAPI {
     fun getKLine(@Query("symbol") symbol: String?,
                  @Query("interval") interval: String?,
                  @Query("from") from: Long,
+                 @Query("to") to: Long,
                  @Query("limit") limit: Int): FoxCall<List<KLineInfo>>
 
     /**

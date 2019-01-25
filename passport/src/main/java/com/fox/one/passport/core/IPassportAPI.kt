@@ -93,5 +93,5 @@ interface IPassportAPI {
      * 重置登录密码，包括手机账号密码&邮箱账号密码
      */
     @POST("/api/account/reset_password")
-    fun resetPhonePassword(@Body request: ResetPasswordReqBody): FoxCall<BasePassportResponse>
+    fun resetPassword(@Body request: ResetPasswordReqBody): FoxCall<BasePassportResponse>
 }

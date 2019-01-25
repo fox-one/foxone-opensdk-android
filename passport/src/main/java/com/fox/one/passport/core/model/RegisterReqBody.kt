@@ -17,7 +17,7 @@ data class RegisterReqBody(
     /**
      * 短信验证码
      */
-    @SerializedName("code") val smsCode: String,
+    @SerializedName("code") val validCode: String,
     /**
      * 短信验证码接口返回的token
      */

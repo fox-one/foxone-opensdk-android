@@ -24,9 +24,9 @@ object ExchangeAPI: IExchangeAPI {
             .getAssets()
     }
 
-    override fun getKLine(symbol: String?, interval: String?, from: Long, limit: Int): FoxCall<List<KLineInfo>> {
+    override fun getKLine(symbol: String?, interval: String?, from: Long, to: Long, limit: Int): FoxCall<List<KLineInfo>> {
         return apiloader.load(IExchangeAPI::class.java)
-            .getKLine(symbol, interval, from, limit)
+            .getKLine(symbol, interval, from, to, limit)
     }
 
     override fun getTradeHistory(symbol: String?, limit: Int): FoxCall<List<TradeHistoryInfo>> {

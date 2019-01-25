@@ -141,9 +141,9 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .modifyPassword(request)
     }
 
-    override fun resetPhonePassword(request: ResetPasswordReqBody): FoxCall<BasePassportResponse> {
+    override fun resetPassword(request: ResetPasswordReqBody): FoxCall<BasePassportResponse> {
         return apiLoader.load(IPassportAPI::class.java)
-            .resetPhonePassword(request)
+            .resetPassword(request)
     }
 
     override fun createKYCProfile(request: KYCProfileReqBody): FoxCall<KYCStatusResponse> {
