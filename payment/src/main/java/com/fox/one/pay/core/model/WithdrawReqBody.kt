@@ -31,5 +31,4 @@ data class WithdrawReqBody(
      */
     @SerializedName("public_key") val assetAddress: String,
     @SerializedName("account_name") val accountName: String,
-    @SerializedName("account_tag") val accountTag: String,
-    @SerializedName("member_id") val memberId: String): Serializable
+    @SerializedName("account_tag") val accountTag: String): Serializable

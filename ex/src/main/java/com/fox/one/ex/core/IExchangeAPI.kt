@@ -21,7 +21,7 @@ interface IExchangeAPI {
     fun getPairs(): FoxCall<List<CoinPairInfo>>
 
     @GET("/exchange/market/assets")
-    fun getAssets(): FoxCall<List<AssetInfo.AssetBasic>>
+    fun getAssets(): FoxCall<List<AssetInfo>>
 
     /**
      * 获取币对K线数据

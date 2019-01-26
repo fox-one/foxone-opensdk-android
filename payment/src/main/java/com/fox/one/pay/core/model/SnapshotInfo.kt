@@ -23,6 +23,6 @@ data class SnapshotInfo(
     @SerializedName("data") var data: Any?,
     @SerializedName("created_at") var createdAt: Long,
     @SerializedName("amount") var amount: Double,
-    @SerializedName("asset") var asset: AssetInfo.AssetBasic?): Serializable {
-    constructor(): this("", "", "", "", "","", "", "", "", "", null, 0L, 0.0, AssetInfo.AssetBasic())
+    @SerializedName("asset") var asset: AssetInfo?): Serializable {
+    constructor(): this("", "", "", "", "","", "", "", "", "", null, 0L, 0.0, AssetInfo())
 }

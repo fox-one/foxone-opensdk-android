@@ -13,6 +13,11 @@ import okhttp3.OkHttpClient
  * @since 2019-01-23
  */
 object PayAPI: IPayAPI {
+    override fun getDepositableAssets(): FoxCall<List<AssetInfo>> {
+        return apiLoader.load(IPayAPI::class.java)
+            .getDepositableAssets()
+    }
+
     override fun getAssets(): FoxCall<List<AssetInfo>> {
         return apiLoader.load(IPayAPI::class.java)
             .getAssets()

@@ -7,7 +7,7 @@
 * 依赖
 
 ```
-implementation 'com.fox.one:passport:0.0.7'
+implementation 'com.fox.one:passport:0.1.8'
 ```
 
 ## 功能说明

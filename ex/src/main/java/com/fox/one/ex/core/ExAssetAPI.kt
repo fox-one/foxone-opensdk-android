@@ -18,6 +18,10 @@ object ExAssetAPI: IExAssetAPI {
             .getAssets()
     }
 
+    override fun getDepositableAssets(): FoxCall<List<AssetInfo>> {
+        return CloudAPI.Impl.getAssets()
+    }
+
     override fun getAsset(assetId: String): FoxCall<AssetResponse> {
         return apiLoader.load(IExAssetAPI::class.java)
             .getAsset(assetId)

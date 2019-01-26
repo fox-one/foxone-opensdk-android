@@ -15,11 +15,10 @@ import okhttp3.OkHttpClient
  */
 object ExchangeAPI: IExchangeAPI {
     override fun getPairs(): FoxCall<List<CoinPairInfo>> {
-        return apiLoader.load(IExchangeAPI::class.java)
-            .getPairs()
+        return CloudAPI.Impl.getPairs()
     }
 
-    override fun getAssets(): FoxCall<List<AssetInfo.AssetBasic>> {
+    override fun getAssets(): FoxCall<List<AssetInfo>> {
         return apiloader.load(IExchangeAPI::class.java)
             .getAssets()
     }

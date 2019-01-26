@@ -18,6 +18,9 @@ interface IExAssetAPI {
     @GET("/member/exchange/assets")
     fun getAssets(): FoxCall<List<AssetInfo>>
 
+    @GET("/member/exchange/assets?chain=1")
+    fun getDepositableAssets(): FoxCall<List<AssetInfo>>
+
     /**
      * 获取单个资产详情
      */
