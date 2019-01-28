@@ -24,7 +24,7 @@ interface IKYCAPI {
     /**
      * 更新身份认证信息
      */
-    @PUT("/api/account/kyc/update")
+    @PUT("/api/account/kyc/profile")
     fun updateKYCProfile(@Body request: KYCProfileReqBody): FoxCall<KYCStatusResponse>
 
     /**

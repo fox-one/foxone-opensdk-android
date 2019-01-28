@@ -3,6 +3,11 @@ package com.fox.one.demo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.fox.one.ex.core.stream.AllTickerStreamObserver
+import com.fox.one.ex.core.stream.StreamDataManager
+import com.fox.one.ex.core.stream.model.AllTickerStreamInfo
+import com.fox.one.ex.core.stream.model.AllTickerStreamReqBody
+import com.fox.one.ex.core.stream.model.StreamAction
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.support.common.utils.JsonUtils
@@ -11,6 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,5 +52,22 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+    }
+
+    private var subIdOfAllTicker: String = ""
+    override fun onResume() {
+        super.onResume()
+
+        subIdOfAllTicker = UUID.randomUUID().toString()
+        StreamDataManager.subscribe(object: AllTickerStreamObserver(AllTickerStreamReqBody(subIdOfAllTicker, StreamAction.SUB.key)) {
+            override fun onUpdate(data: AllTickerStreamInfo) {
+                LogUtils.i("foxone", "stream:::${JsonUtils.optToJson(data)}")
+            }
+        })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        StreamDataManager.unsubscribe(AllTickerStreamReqBody(subIdOfAllTicker, StreamAction.UNSUB.key))
     }
 }

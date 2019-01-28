@@ -191,7 +191,10 @@ object StreamDataManager {
             Enviroment.RELEASE -> {
                 baseUrl.releaseUrl
             }
-            else -> {
+            Enviroment.BETA -> {
+                baseUrl.betaUrl
+            }
+            Enviroment.ALPHA -> {
                 baseUrl.alphaUrl
             }
         }

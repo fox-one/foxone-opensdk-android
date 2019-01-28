@@ -61,7 +61,7 @@ object HttpErrorHandler {
 
                     if (listener == null) {
                         if (TextUtils.isEmpty(hint)) {
-                            ToastUtil.show(FoxRuntime.application, errorResponse?.hint ?: errorResponse?.msg ?: "")
+                            ToastUtil.show(FoxRuntime.application, if (TextUtils.isEmpty(errorResponse?.hint)) errorResponse?.msg ?: "" else errorResponse?.hint ?: "")
                         } else {
                             hint?.let {
                                 ToastUtil.show(FoxRuntime.application, it)
@@ -71,7 +71,7 @@ object HttpErrorHandler {
                         val result: Boolean = listener.invoke(it.response().code(), errorResponse)
                         if (!result) {
                             if (TextUtils.isEmpty(hint)) {
-                                ToastUtil.show(FoxRuntime.application, errorResponse?.hint ?: errorResponse?.msg ?: "")
+                                ToastUtil.show(FoxRuntime.application, if (TextUtils.isEmpty(errorResponse?.hint)) errorResponse?.msg ?: "" else errorResponse?.hint ?: "")
                             } else {
                                 hint?.let {
                                     ToastUtil.show(FoxRuntime.application, it)

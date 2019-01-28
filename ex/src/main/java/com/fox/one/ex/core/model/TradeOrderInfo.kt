@@ -13,47 +13,50 @@ data class TradeOrderInfo(
     /**
      * 订单ID
      */
-    @SerializedName("id") var id: String,
+    @SerializedName("id") var id: String = "",
     /**
      * 订单时间
      */
-    @SerializedName("time") var createdAt: Long,
+    @SerializedName("created_at") var createdAt: Long = 0,
     /**
      * 订单类型: LIMIT, MARKET
      */
-    @SerializedName("type") var type: String,
+    @SerializedName("order_type") var type: String = "",
+    @SerializedName("user_id") var userId: String = "",
+    @SerializedName("quote_asset_id") var quoteAssetId: String = "",
+    @SerializedName("base_asset_id") var baseAssetId: String = "",
     /**
      * 交易币对符号， e.g., CNBUSDT
      */
-    @SerializedName("symbol") var symbol: String,
+    @SerializedName("symbol") var symbol: String = "",
     /**
      * 交易方向，ASK，BID
      */
-    @SerializedName("side") var side: String,
-    /**
-     * 交易价格
-     */
-    @SerializedName("price") var price: Double,
+    @SerializedName("side") var side: String = "",
     /**
      * 交易状态，DONE，PENDING
      */
-    @SerializedName("state") var state: String,
+    @SerializedName("state") var state: String = "",
+    /**
+     * 交易价格
+     */
+    @SerializedName("price") var price: Double = 0.0,
     /**
      * e.g., EOS/BTC: EOS未成交量
      */
-    @SerializedName("remaining_amount") var remainAmount: Double,
+    @SerializedName("remaining_amount") var remainAmount: Double = 0.0,
     /**
      * e.g., EOS/BTC: EOS已成交量
      */
-    @SerializedName("filled_amount") var filledAmount: Double,
+    @SerializedName("filled_amount") var filledAmount: Double = 0.0,
     /**
      * e.g., EOS/BTC: BTC未成交量
      */
-    @SerializedName("remaining_funds") var remainFunds: Double,
+    @SerializedName("remaining_fund") var remainFunds: Double = 0.0,
     /**
      * e.g., EOS/BTC: BTC已成交量
      */
-    @SerializedName("filled_funds") var filledFunds: Double): Serializable {
-    constructor(): this("", 0L, "", "", "", 0.0, "", 0.0, 0.0, 0.0, 0.0)
+    @SerializedName("filled_fund") var filledFunds: Double = 0.0): Serializable {
+    constructor(): this("", 0L, "", "", "", "", "", "", "", 0.0, 0.0, 0.0, 0.0, 0.0)
 
 }
