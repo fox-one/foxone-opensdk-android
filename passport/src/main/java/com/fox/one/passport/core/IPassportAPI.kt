@@ -74,7 +74,7 @@ interface IPassportAPI {
     /**
      * 修改密码
      */
-    @POST("/api/account/password")
+    @POST("/api/account/modify_password")
     fun modifyPassword(@Body request: ModifyPasswordReqBody): FoxCall<BasePassportResponse>
 
     /**

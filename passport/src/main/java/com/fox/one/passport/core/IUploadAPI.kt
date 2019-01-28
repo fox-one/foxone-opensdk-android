@@ -4,6 +4,7 @@ import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.passport.core.model.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
+import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 
@@ -17,6 +18,6 @@ import retrofit2.http.Part
 interface IUploadAPI {
 
     @Multipart
-    @PUT("/api/file")
+    @POST("/api/file")
     fun uploadFile(@Part file: MultipartBody.Part): FoxCall<UploadResponse>
 }

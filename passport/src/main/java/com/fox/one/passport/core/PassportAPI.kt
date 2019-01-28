@@ -159,7 +159,7 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .updateKYCProfile(request)
     }
 
-    override fun getKYCProfile(): FoxCall<KYCProfileInfo> {
+    override fun getKYCProfile(): FoxCall<KYCProfileResponse> {
         return apiLoader.load(IKYCAPI::class.java)
             .getKYCProfile()
     }

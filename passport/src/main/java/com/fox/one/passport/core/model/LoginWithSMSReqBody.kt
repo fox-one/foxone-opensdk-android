@@ -11,7 +11,7 @@ import java.io.Serializable
  */
 data class LoginWithSMSReqBody(
     /**
-     * 手机号
+     * token
      */
     @SerializedName("token") var token: String,
     /**

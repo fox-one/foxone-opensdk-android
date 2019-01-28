@@ -11,6 +11,7 @@ import java.io.Serializable
  * @since 2018-11-28
  */
 data class ResetPasswordReqBody(
+    @SerializedName("code") val code: String,
     /**
      * request token
      */

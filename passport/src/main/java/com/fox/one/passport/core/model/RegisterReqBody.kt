@@ -15,7 +15,7 @@ data class RegisterReqBody(
      */
     @SerializedName("name") val nickName: String,
     /**
-     * 短信验证码
+     * 验证码
      */
     @SerializedName("code") val validCode: String,
     /**

@@ -2,6 +2,7 @@ package com.fox.one.passport.core
 
 import com.fox.one.passport.core.model.KYCProfileInfo
 import com.fox.one.passport.core.model.KYCProfileReqBody
+import com.fox.one.passport.core.model.KYCProfileResponse
 import com.fox.one.passport.core.model.KYCStatusResponse
 import com.fox.one.support.framework.network.FoxCall
 import retrofit2.http.*
@@ -23,12 +24,12 @@ interface IKYCAPI {
     /**
      * 更新身份认证信息
      */
-    @PUT("api/kyc/update")
+    @PUT("/api/account/kyc/update")
     fun updateKYCProfile(@Body request: KYCProfileReqBody): FoxCall<KYCStatusResponse>
 
     /**
      * 获取身份认证信息
      */
-    @GET("api/kyc/profile")
-    fun getKYCProfile(): FoxCall<KYCProfileInfo>
+    @GET("/api/account/kyc/profile")
+    fun getKYCProfile(): FoxCall<KYCProfileResponse>
 }
