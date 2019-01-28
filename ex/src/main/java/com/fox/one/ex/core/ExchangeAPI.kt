@@ -2,6 +2,7 @@ package com.fox.one.ex.core
 
 import com.fox.one.ex.core.model.*
 import com.fox.one.pay.core.model.AssetInfo
+import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.support.framework.network.HttpEngine
@@ -79,14 +80,12 @@ object ExchangeAPI: IExchangeAPI {
     const val BETA_URL = "https://gateway.fox.one"
     const val RELEASE_URL = "https://gateway.fox.one"
 
-    var apiLoader = APILoader()
-
     init {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpEngine.defaultInterceptor)
             .build()
 
-        apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
+        apiloader.setOkHttp(okHttpClient)
+        apiloader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
     }
 }

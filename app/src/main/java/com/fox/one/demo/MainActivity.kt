@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.btn_register).setOnClickListener {
-            RegisterActivity.start(this@MainActivity)
+         //   RegisterActivity.start(this@MainActivity)
         }
 
         findViewById<Button>(R.id.btn_login).setOnClickListener {

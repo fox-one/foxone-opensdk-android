@@ -49,9 +49,12 @@ object PassportAPI: IPassportAPI, IKYCAPI {
         httpUrlBuilder?.addQueryParameter("_ts", "$timeInSecond")
             ?.addQueryParameter("_nonce", nonce)
 
-        val newUrl = httpUrlBuilder?.build()?.url().toString()
+        val newHttpUrl = httpUrlBuilder?.build()
+        val newUrl = newHttpUrl?.url().toString()
+        val host = if (newHttpUrl?.isHttps == true) "https://${newHttpUrl?.host()}"
+            else "http://${newHttpUrl?.host()}"
 
-        val urlExcludeHost = newUrl.substring(apiLoader.getBaseUrl().length)
+        val urlExcludeHost = newUrl.substring(host.length)
 
         val toSignMessage = StringBuilder(method).append(urlExcludeHost).append(bodyString).toString()
         val sign = SecurityUtils.SHA256.encryptWithBase64(toSignMessage)

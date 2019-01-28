@@ -71,3 +71,5 @@ sign
 UploadAPI.uploadFile(UploadAPI.createUploadReqBody(File))
 
 ```
+
+* 注意：当登录成功后，需要把登录后的账号信息赋值给`PassportAPI.accountInfo`。
