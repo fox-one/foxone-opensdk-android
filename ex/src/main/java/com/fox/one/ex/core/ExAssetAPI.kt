@@ -13,14 +13,23 @@ import okhttp3.OkHttpClient
  * @since 2019-01-23
  */
 object ExAssetAPI: IExAssetAPI {
+
     override fun getAssets(): FoxCall<List<AssetInfo>> {
         return apiLoader.load(IExAssetAPI::class.java)
             .getAssets()
     }
 
-    override fun getDepositableAssets(): FoxCall<List<AssetInfo>> {
+    override fun getMainChainAssets(): FoxCall<List<AssetInfo>> {
         return apiLoader.load(IExAssetAPI::class.java)
-            .getDepositableAssets()
+            .getMainChainAssets()
+    }
+
+    fun getGlobalAssets(): FoxCall<List<AssetInfo>> {
+        return ExchangeAPI.getAssets()
+    }
+
+    fun getExchangableAssets(): FoxCall<List<AssetInfo>> {
+        return CloudAPI.Impl.getAssets()
     }
 
     override fun getAsset(assetId: String): FoxCall<AssetResponse> {

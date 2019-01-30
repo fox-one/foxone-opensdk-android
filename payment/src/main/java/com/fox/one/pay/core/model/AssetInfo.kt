@@ -17,6 +17,7 @@ data class AssetInfo(
      * 资产价格，以CNY为计价单位
      */
     @SerializedName("price") var price: Double = 0.0,
+    @SerializedName("price_usd") var PriceUsd: Double = 0.0,
     @SerializedName("change") var changePercent: Double = 0.0,
     @SerializedName("precision") var precision: Int = 8,
     @SerializedName("chain_id") var chainId: String?,
@@ -26,7 +27,7 @@ data class AssetInfo(
     @SerializedName("public_key") var publicKey: String?,
     @SerializedName("account_name") var accountName: String?,
     @SerializedName("account_tag") var accountTag: String?): Serializable {
-    constructor(): this("", 0.0, 0.0, 0.0, 8, "", "", "", "", "", "", "")
+    constructor(): this("", 0.0, 0.0, 0.0, 0.0, 8, "", "", "", "", "", "", "")
 
     fun isEOS(): Boolean {
         return symbol == "EOS"

@@ -21,7 +21,7 @@ interface IPayAPI {
      * 获取支持转入的资产列表
      */
     @GET("/member/payment/assets?chain=1")
-    fun getDepositableAssets(): FoxCall<List<AssetInfo>>
+    fun getMainChainAssets(): FoxCall<List<AssetInfo>>
 
     /**
      * 获取单个资产详情
