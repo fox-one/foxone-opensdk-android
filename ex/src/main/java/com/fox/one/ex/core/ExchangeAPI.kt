@@ -1,8 +1,10 @@
 package com.fox.one.ex.core
 
+import android.text.TextUtils
 import com.fox.one.ex.core.model.*
 import com.fox.one.pay.core.model.AssetInfo
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.framework.Order
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.support.framework.network.HttpEngine
@@ -59,9 +61,9 @@ object ExchangeAPI: IExchangeAPI {
             .cancelOrder(orderId)
     }
 
-    override fun getOrders(symbol: String?, state: String?, cursor: String?, limit: Int): FoxCall<TradeOrderResponse> {
+    override fun getOrders(symbol: String?, state: String?, cursor: String?, limit: Int, order: String): FoxCall<TradeOrderResponse> {
         return apiloader.load(IExchangeAPI::class.java)
-            .getOrders(symbol, state, cursor, limit)
+            .getOrders(symbol, state, cursor, limit, if (TextUtils.isEmpty(order)) Order.DESC.name else order)
     }
 
     override fun getOrderInfo(orderId: String): FoxCall<TradeOrderInfo> {
@@ -77,8 +79,8 @@ object ExchangeAPI: IExchangeAPI {
     private val apiloader = APILoader()
 
     const val ALPHA_URL = "https://dev-gateway.fox.one"
-    const val BETA_URL = "https://gateway.fox.one"
-    const val RELEASE_URL = "https://gateway.fox.one"
+    const val BETA_URL = "https://openapi.fox.one"
+    const val RELEASE_URL = "https://openapi.fox.one"
 
     init {
         val okHttpClient = OkHttpClient.Builder()

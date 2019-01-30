@@ -22,8 +22,8 @@ import java.net.URL
  */
 object PassportAPI: IPassportAPI, IKYCAPI {
     const val ALPHA_URL = "https://dev-cloud.fox.one"
-    const val BETA_URL = "https://cloud.fox.one"
-    const val RELEASE_URL = "https://cloud.fox.one"
+    const val BETA_URL = "https://cloudapi.fox.one"
+    const val RELEASE_URL = "https://cloudapi.fox.one"
 
     var accountInfo: AccountInfo = AccountInfo()
     var apiLoader = APILoader()

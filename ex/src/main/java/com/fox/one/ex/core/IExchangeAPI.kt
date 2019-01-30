@@ -82,9 +82,10 @@ interface IExchangeAPI {
      * @param status PENDING or DONE
      * @param fromId 从哪条ID开始获取订单列表
      * @param limit 最大请求数据量(分页用)
+     * @param order 降序：DESC，升序：ASC
      */
     @GET("/member/exchange/orders")
-    fun getOrders(@Query("symbol") symbol: String?, @Query("state") state: String?, @Query("cursor") cursor: String? = null, @Query("limit") limit: Int = 20): FoxCall<TradeOrderResponse>
+    fun getOrders(@Query("symbol") symbol: String?, @Query("state") state: String?, @Query("cursor") cursor: String? = null, @Query("limit") limit: Int = 20, @Query("order") order: String = "DESC"): FoxCall<TradeOrderResponse>
 
     @GET("/member/exchange/order/{orderId}")
     fun getOrderInfo(orderId: String): FoxCall<TradeOrderInfo>
