@@ -43,36 +43,41 @@ object PassportAPI: IPassportAPI, IKYCAPI {
 
     fun sign(method: String, url: String, timeInSecond: Long, nonce: String, bodyString: String): SignResult {
         //sign
+        try {
+            LogUtils.i("foxone", "method:$method, url:$url, time: $timeInSecond, nonce:$nonce, body: $bodyString")
+            val httpUrlBuilder = HttpUrl.get(URL(url))?.newBuilder()
+            httpUrlBuilder?.addQueryParameter("_ts", "$timeInSecond")
+                ?.addQueryParameter("_nonce", nonce)
 
-        LogUtils.i("foxone", "method:$method, url:$url, time: $timeInSecond, nonce:$nonce, body: $bodyString")
-        val httpUrlBuilder = HttpUrl.get(URL(url))?.newBuilder()
-        httpUrlBuilder?.addQueryParameter("_ts", "$timeInSecond")
-            ?.addQueryParameter("_nonce", nonce)
-
-        val newHttpUrl = httpUrlBuilder?.build()
-        val newUrl = newHttpUrl?.url().toString()
-        val host = if (newHttpUrl?.isHttps == true) "https://${newHttpUrl?.host()}"
+            val newHttpUrl = httpUrlBuilder?.build()
+            val newUrl = newHttpUrl?.url().toString()
+            val host = if (newHttpUrl?.isHttps == true) "https://${newHttpUrl?.host()}"
             else "http://${newHttpUrl?.host()}"
 
-        val urlExcludeHost = newUrl.substring(host.length)
+            val urlExcludeHost = newUrl.substring(host.length)
 
-        val toSignMessage = StringBuilder(method).append(urlExcludeHost).append(bodyString).toString()
-        val sign = SecurityUtils.SHA256.encryptWithBase64(toSignMessage)
-        LogUtils.i("foxone", "toSign: $toSignMessage,  secret: ${accountInfo.session.secret}")
-        LogUtils.i("foxone", "sign: $sign")
+            val toSignMessage = StringBuilder(method).append(urlExcludeHost).append(bodyString).toString()
+            val sign = SecurityUtils.SHA256.encryptWithBase64(toSignMessage)
+            LogUtils.i("foxone", "toSign: $toSignMessage,  secret: ${accountInfo.session.secret}")
+            LogUtils.i("foxone", "sign: $sign")
 
-        val token = Jwts.builder().setHeaderParam("alg", "HS256")
-            .setHeaderParam("typ", "JWT")
-            .claim("exp", accountInfo.session.expired)
-            .claim("key", accountInfo.session.key)
-            .claim("sign", sign)
-            .signWith(Keys.hmacShaKeyFor(accountInfo.session.secret.toByteArray()))
-            .compact()
+            val token = Jwts.builder().setHeaderParam("alg", "HS256")
+                .setHeaderParam("typ", "JWT")
+                .claim("exp", accountInfo.session.expired)
+                .claim("key", accountInfo.session.key)
+                .claim("sign", sign)
+                .signWith(Keys.hmacShaKeyFor(accountInfo.session.secret.toByteArray()))
+                .compact()
 
-        LogUtils.i("foxone", "newUrl: $newUrl")
-        LogUtils.i("foxone", "jwtToken: $token")
+            LogUtils.i("foxone", "newUrl: $newUrl")
+            LogUtils.i("foxone", "jwtToken: $token")
 
-        return SignResult(newUrl=newUrl, sign = token)
+            return SignResult(newUrl=newUrl, sign = token)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return SignResult(url, "")
     }
 
     fun getCaptchaUrl(captchaId: String): String {

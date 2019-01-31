@@ -32,7 +32,7 @@ object CurrencyRateManager {
 
     fun init(application: Application) {
 
-        apiLoader.setBaseUri(APILoader.BaseUrl("https://api.gbi.news", "https://api.gbi.news", "https://api.gbi.news"))
+        apiLoader.setBaseUri(APILoader.BaseUrl("https://dev-gateway.fox.one", "https://openapi.fox.one", "https://openapi.fox.one"))
         startSync()
     }
 

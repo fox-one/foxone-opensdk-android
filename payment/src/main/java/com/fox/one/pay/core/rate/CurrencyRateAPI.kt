@@ -11,6 +11,6 @@ import retrofit2.http.GET
  */
 interface CurrencyRateAPI {
 
-    @GET("/currency")
+    @GET("/wallet/exchange-rates")
     fun getCurrencyRates(): FoxCall<CurrencyResponse>
 }
