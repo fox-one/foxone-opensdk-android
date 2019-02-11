@@ -13,6 +13,7 @@ Fox.ONE开放平台SDK是一套区块链支付、结算、交易的系统解决�
 ```
 implementation 'com.fox.one:cloud:0.1.8'
 ```
+查看[最新版本](http://jcenter.bintray.com/com/fox/one/cloud)
 
 * 在`Application.onCreate(..)`初始化`cloud`sdk
 

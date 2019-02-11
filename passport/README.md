@@ -9,6 +9,7 @@
 ```
 implementation 'com.fox.one:passport:0.1.8'
 ```
+查看[最新版本](http://jcenter.bintray.com/com/fox/one/passport)
 
 ## 功能说明
 
