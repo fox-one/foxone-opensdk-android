@@ -3,10 +3,8 @@ package com.fox.one.passport.core
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.passport.core.model.UploadResponse
-import com.fox.one.support.framework.network.HttpEngine
 import okhttp3.MediaType
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import java.io.File
 

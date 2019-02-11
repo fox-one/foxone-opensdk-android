@@ -26,7 +26,11 @@ import java.util.concurrent.TimeUnit
  */
 object FoxSDK {
 
+    var merchantId: String = ""
+
     fun init(application: Application, merchantId: String, options: Options?) {
+
+        this.merchantId = merchantId
         FoxRuntime.init(application)
 
         // config options
@@ -40,9 +44,9 @@ object FoxSDK {
         HttpEngine.defaultInterceptor = Interceptor {
             val request = it.request()
 
-            LogUtils.i("foxone", "${request.url().toString()}")
+            LogUtils.i("foxone", "merchantId:${this.merchantId}, url:${request.url().toString()}")
             val newRequestBuilder = it.request().newBuilder()
-            newRequestBuilder.addHeader(HEADER_MERCHANT_ID, merchantId)
+            newRequestBuilder.addHeader(HEADER_MERCHANT_ID, this.merchantId)
 
             if (PassportAPI.isLogin()) {
                 //sign

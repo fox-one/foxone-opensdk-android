@@ -20,11 +20,8 @@ import retrofit2.Response
 object CurrencyRateManager {
 
     private const val WHAT_SYNC = 1
-    private const val WHAT_RETRY = 2
-    private const val MAX_REQUEST_COUNT = 3
     private const val DELAY_RETRY = 600L
-    private const val DELAY_SYNC = 5 * 1000L
-    private var retryCount = 0
+    private const val DELAY_SYNC = 10 * 1000L
     private var syncEnable = false
     private var exchangeRateHandler = ExchangeRateHandler()
     private val apiLoader = APILoader()
@@ -32,7 +29,13 @@ object CurrencyRateManager {
 
     fun init(application: Application) {
 
-        apiLoader.setBaseUri(APILoader.BaseUrl("https://dev-gateway.fox.one", "https://openapi.fox.one", "https://openapi.fox.one"))
+        apiLoader.setBaseUri(
+            APILoader.BaseUrl(
+                "https://dev-gateway.fox.one",
+                "https://openapi.fox.one",
+                "https://openapi.fox.one"
+            )
+        )
         startSync()
     }
 
@@ -41,19 +44,17 @@ object CurrencyRateManager {
      */
     private fun syncExchangeRate(listener: OnExchangeRateUpdateListener?) {
         apiLoader.load(CurrencyRateAPI::class.java).getCurrencyRates()
-                .enqueue(object : Callback<CurrencyResponse> {
-                    override fun onFailure(call: Call<CurrencyResponse>, t: Throwable) {
-                        exchangeRateHandler.sendEmptyMessage(WHAT_RETRY)
-                        listener?.onRateUpdated(null)
-                    }
+            .enqueue(object : Callback<CurrencyResponse> {
+                override fun onFailure(call: Call<CurrencyResponse>, t: Throwable) {
+                    listener?.onRateUpdated(null)
+                }
 
-                    override fun onResponse(call: Call<CurrencyResponse>, response: Response<CurrencyResponse>) {
-                        retryCount = 0
-                        currencyTickers = response.body()?.data?.cnyTickers
+                override fun onResponse(call: Call<CurrencyResponse>, response: Response<CurrencyResponse>) {
+                    currencyTickers = response.body()?.data?.cnyTickers
 
-                        listener?.onRateUpdated(currencyTickers)
-                    }
-                })
+                    listener?.onRateUpdated(currencyTickers)
+                }
+            })
     }
 
     /**
@@ -121,11 +122,9 @@ object CurrencyRateManager {
 
     fun startSync() {
         syncEnable = true
-        retryCount = 0
 
-        if (!exchangeRateHandler.hasMessages(WHAT_SYNC)) {
-            exchangeRateHandler.sendEmptyMessage(WHAT_SYNC)
-        }
+        exchangeRateHandler.removeMessages(WHAT_SYNC)
+        exchangeRateHandler.sendEmptyMessage(WHAT_SYNC)
     }
 
     fun stopSync() {
@@ -135,25 +134,15 @@ object CurrencyRateManager {
     }
 
 
-    internal class ExchangeRateHandler: Handler(Looper.getMainLooper()) {
+    internal class ExchangeRateHandler : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
-            if (WHAT_RETRY == msg.what) {
-                if (retryCount < MAX_REQUEST_COUNT) {
+            if (WHAT_SYNC == msg.what) {
+                if (syncEnable) {
                     syncExchangeRate(object : OnExchangeRateUpdateListener {
                         override fun onRateUpdated(cnyTickers: List<CurrencyTicker>?) {
-                            if (currencyTickers == null) {
-                                retryCount++
-                            }
-
-                            exchangeRateHandler.sendEmptyMessageDelayed(WHAT_SYNC, DELAY_RETRY)
-                        }
-                    })
-                }
-            } else if (WHAT_SYNC == msg.what) {
-                if (syncEnable) {
-                    syncExchangeRate(object: OnExchangeRateUpdateListener {
-                        override fun onRateUpdated(cnyTickers: List<CurrencyTicker>?) {
-                            if (syncEnable) {
+                            if (currencyTickers == null || currencyTickers?.isEmpty() == true) {
+                                exchangeRateHandler.sendEmptyMessageDelayed(WHAT_SYNC, DELAY_RETRY)
+                            } else {
                                 exchangeRateHandler.sendEmptyMessageDelayed(WHAT_SYNC, DELAY_SYNC)
                             }
                         }
