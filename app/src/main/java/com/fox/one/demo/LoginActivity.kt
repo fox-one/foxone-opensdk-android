@@ -1,5 +1,6 @@
 package com.fox.one.demo
 
+import android.accounts.Account
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +13,7 @@ import com.fox.one.passport.core.model.LoginWithPhoneReqBody
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.network.HttpErrorHandler
+import com.foxone.exchange.framework.account.AccountManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +43,7 @@ class LoginActivity: AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
-                    DemoApp.onLogin(this@LoginActivity, response.body() ?: AccountInfo())
+                    AccountManager.login(response.body() ?: AccountInfo())
                     LogUtils.i("foxone", "login::${JsonUtils.optToJson(response.body())}")
                 }
             })

@@ -99,6 +99,7 @@ networkErrorToast
 -keep public class * extends android.support.v4.**
 -keep public class com.android.vending.licensing.ILicensingService
 
+# android.support.v4.content.FileProvider
 -keep class android.support.v4.** {*;}
 
 -keepclasseswithmembers enum * {
@@ -188,12 +189,16 @@ networkErrorToast
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+
+
+# -----------------webtoken start--------------------
+-keep class io.jsonwebtoken.**{*;}
+-dontwarn io.jsonwebtoken.**
+#------------------webtoken end--------------------
+
 ```
 
 
 ### 注：文档中提到的相关SDK的版本可能比较低，建议接入[最新版本](http://jcenter.bintray.com/com/fox/one/)
 
-## 版本日志
-
-### 0.1.0
-* first release SDK: `payment`,`ex`,`cloud`
+## [Release](https://github.com/fox-one/foxone-opensdk-android/releases)

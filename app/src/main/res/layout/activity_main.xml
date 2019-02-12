@@ -6,25 +6,36 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <Button
+    <android.support.design.button.MaterialButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Theme.PrimaryButton"
             android:text="注册"/>
-    <Button
+    <android.support.design.button.MaterialButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Theme.PrimaryButton"
             android:text="登录"/>
-    <Button
+    <android.support.design.button.MaterialButton
             android:id="@+id/btn_sms_code"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Theme.PrimaryButton"
             android:text="SMS 登录"/>
 
-    <Button
+    <android.support.design.button.MaterialButton
             android:id="@+id/btn_user_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Theme.PrimaryButton"
             android:text="用户信息"/>
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btn_exchange"
+        android:layout_width="match_parent"
+        style="@style/Theme.PrimaryButton"
+        android:text="交易所.行情"/>
+    <android.support.design.button.MaterialButton
+            android:id="@+id/btn_wallet"
+            android:layout_width="match_parent"
+            style="@style/Theme.PrimaryButton"
+            android:text="交易所.钱包"/>
 </LinearLayout>

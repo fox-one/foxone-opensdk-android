@@ -74,3 +74,24 @@ UploadAPI.uploadFile(UploadAPI.createUploadReqBody(File))
 ```
 
 * 注意：当登录成功后，需要把登录后的账号信息赋值给`PassportAPI.accountInfo`。
+
+## 关于JSBridge调用原生接口生成JWT Token说明
+
+* API: `PassportAPI.sign`
+
+* 参数说明：
+
+```
+
+/**
+     * 生成jwt签名
+     * @param method 请求的方法，e.g., GET, POST, PUT, DELETE....
+     * @param url 请求的url, e.g., https://dev-cloud.fox.one/api/account/detail
+     * @param timeInSecond 当前时间，以秒为单位
+     * @param nonce 唯一随机字串，以UUID生成
+     * @param bodyString 如果请求有Body，把body转成json字符串（body一般都是json对象）
+     * @return [SignResult] 返回新的url及签名(sign)，后续请求使用新的url请求[SignResult.newUrl]，在请求的header加上jwt token签名[SignResult.sign]，e.g., Authorization:Bearer 12334ea234323534
+     */
+    fun sign(method: String, url: String, timeInSecond: Long, nonce: String, bodyString: String)
+    
+```

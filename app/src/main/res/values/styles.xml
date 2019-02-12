@@ -1,11 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="DemoTheme" parent="Theme.F1EX.Day">
+        <item name="f1exBackgroundColor">@color/background_color_day</item>
+        <item name="f1exBackgroundSecondColor">@color/background_second_color_day</item>
+        <item name="f1exBackgroundThirdColor">@color/background_third_color_day</item>
+        <item name="f1exPrimaryColor">@color/primary_color_day</item>
+        <item name="f1exSecondColor">@color/second_color_day</item>
+        <item name="f1exTextPrimaryColor">@color/text_primary_color_day</item>
+        <item name="f1exTextSecondColor">@color/text_second_color_day</item>
+        <item name="f1exDividerColor">@color/divider_color_day</item>
+        <item name="f1exErrorColor">@color/error_color_day</item>
+        <item name="f1exStatusBarColor">@color/status_color_day</item>
+        <item name="f1exActionBarColor">@color/action_bar_color_day</item>
+        <item name="f1exIconAdd">@drawable/ic_add_black</item>
+        <item name="f1exIconSearch">@drawable/ic_search_black</item>
+        <item name="f1exIconHistory">@drawable/ic_history_black</item>
+        <item name="f1exIconBack">@drawable/ic_back_black</item>
+        <item name="f1exIconLoading">@drawable/spinner_black</item>
+        <item name="f1exExchange">@drawable/ic_exchange</item>
+        <item name="f1exSetting">@drawable/ic_setting</item>
     </style>
 
 </resources>

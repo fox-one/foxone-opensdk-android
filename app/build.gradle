@@ -14,7 +14,9 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [SCHEME: 'demo']
     }
     buildTypes {
         release {
@@ -43,20 +45,31 @@ dependencies {
     implementation 'android.arch.lifecycle:livedata:1.1.1'
     implementation 'android.arch.lifecycle:livedata-core:1.1.1'
 
+    implementation 'com.android.support:multidex:1.0.3'
+
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'commons-codec:commons-codec:1.10'
     implementation 'org.apache.commons:commons-compress:1.12'
 
-    api project(':support-common')
-    api project(':support-framework')
-    api project(':passport')
-    api project(':cloud')
-    api project(':payment')
-    api project(':ex')
+    api('com.fox.one:ex-ui:0.9.1') {
+//        exclude module: 'support-common'
+//        exclude module: 'support-framework'
+//        exclude module: 'passport'
+//        exclude module: 'cloud'
+//        exclude module: 'pay'
+//        exclude module: 'ex'
+    }
 
-    api 'com.github.bumptech.glide:glide:4.6.1'
-    api 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
-    kapt 'com.github.bumptech.glide:compiler:4.6.1'
+//    api project(':support-common')
+//    api project(':support-framework')
+//    api project(':passport')
+//    api project(':cloud')
+//    api project(':payment')
+//    api project(':ex')
+
+//    api 'com.github.bumptech.glide:glide:4.6.1'
+//    api 'com.github.bumptech.glide:okhttp3-integration:4.6.1'
+//    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

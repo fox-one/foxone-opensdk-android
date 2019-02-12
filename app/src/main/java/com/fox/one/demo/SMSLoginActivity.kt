@@ -12,6 +12,8 @@ import com.fox.one.passport.core.model.*
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.imageloader.ImageLoader
+import com.fox.one.support.framework.network.HttpErrorHandler
+import com.foxone.exchange.framework.account.AccountManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +38,7 @@ class SMSLoginActivity: AppCompatActivity() {
         capV.setOnClickListener {
             PassportAPI.requestCaptcha().enqueue(object: Callback<CaptchaInfo> {
                 override fun onFailure(call: Call<CaptchaInfo>, t: Throwable) {
-
+                    HttpErrorHandler.handle(t)
                 }
 
                 override fun onResponse(call: Call<CaptchaInfo>, response: Response<CaptchaInfo>) {
@@ -60,7 +62,7 @@ class SMSLoginActivity: AppCompatActivity() {
             )
                 .enqueue(object: Callback<ValidCodeResponse> {
                     override fun onFailure(call: Call<ValidCodeResponse>, t: Throwable) {
-
+                        HttpErrorHandler.handle(t)
                     }
 
                     override fun onResponse(call: Call<ValidCodeResponse>, response: Response<ValidCodeResponse>) {
@@ -78,11 +80,11 @@ class SMSLoginActivity: AppCompatActivity() {
                 )
             ).enqueue(object: Callback<AccountInfo> {
                 override fun onFailure(call: Call<AccountInfo>, t: Throwable) {
-
+                    HttpErrorHandler.handle(t)
                 }
 
                 override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
-                    DemoApp.onLogin(this@SMSLoginActivity, response.body() ?: AccountInfo())
+                    AccountManager.login(response.body() ?: AccountInfo())
                     LogUtils.i("foxone", "sms login: ${JsonUtils.optToJson(response.body())}")
                 }
             })

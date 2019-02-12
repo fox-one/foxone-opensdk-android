@@ -12,6 +12,10 @@ import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.framework.APPLifeCycleManager
+import com.fox.one.support.framework.network.HttpErrorHandler
+import com.foxone.exchange.ex.wallet.WalletActivity
+import com.foxone.exchange.framework.account.AccountManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.btn_register).setOnClickListener {
-         //   RegisterActivity.start(this@MainActivity)
+            RegisterActivity.start(this@MainActivity)
         }
 
         findViewById<Button>(R.id.btn_login).setOnClickListener {
@@ -37,20 +41,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_user_info).setOnClickListener {
-            PassportAPI.getAccountInfo().enqueue(object: Callback<AccountInfo> {
-                override fun onFailure(call: Call<AccountInfo>, t: Throwable) {
-                    if (t is HttpException) {
-                        LogUtils.i("foxone", "${t.response().errorBody()?.string()}")
-                    } else {
-                        LogUtils.i("foxone", "${t.toString()}")
+//            if (AccountManager.isLogin()) {
+                PassportAPI.getAccountInfo().enqueue(object: Callback<AccountInfo> {
+                    override fun onFailure(call: Call<AccountInfo>, t: Throwable) {
+                        HttpErrorHandler.handle(t)
+                        if (t is HttpException) {
+                            LogUtils.i("foxone", "httpcode:${t.response().code()}, msg: ${t.response().errorBody()?.string()}")
+                        } else {
+                            LogUtils.i("foxone", "${t.toString()}")
+                        }
                     }
-                }
 
-                override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
-                    LogUtils.i("foxone", "${JsonUtils.optToJson(response.body())}")
-                }
+                    override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
+                        LogUtils.i("foxone", "${JsonUtils.optToJson(response.body())}")
+                    }
 
-            })
+                })
+//            }
+        }
+
+        findViewById<Button>(R.id.btn_exchange).setOnClickListener {
+            ExchangeActivity.start(this@MainActivity)
+        }
+
+        findViewById<Button>(R.id.btn_wallet).setOnClickListener {
+//            if (AccountManager.isLogin()) {
+                WalletActivity.start(this@MainActivity)
+//            }
         }
     }
 
@@ -61,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         subIdOfAllTicker = UUID.randomUUID().toString()
         StreamDataManager.subscribe(object: AllTickerStreamObserver(AllTickerStreamReqBody(subIdOfAllTicker, StreamAction.SUB.key)) {
             override fun onUpdate(data: AllTickerStreamInfo) {
-                LogUtils.i("foxone", "stream:::${JsonUtils.optToJson(data)}")
+//                LogUtils.i("foxone", "stream:::${JsonUtils.optToJson(data)}")
             }
         })
     }
