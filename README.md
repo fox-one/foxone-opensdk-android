@@ -31,7 +31,7 @@ FoxSDK.init(this, MERCHANT_ID, FoxSDK.Options(logEnable = true, debugEnable = tr
 * [账号系统接入说明](passport/README.md)
 * [钱包功能接入数据](payment/README.md)
 * [交易所功能接入说明](ex/README.md)
-* [交易所模块（含UI）接入说明](docs/README-ex-ui.md)
+* [交易所模块（含UI）接入说明](docs/README-ex-ui.md)，具体可参考Demo接入
 
 * **API调用举例**
 
