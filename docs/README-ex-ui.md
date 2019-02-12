@@ -55,6 +55,32 @@ ExModule.setOnLaunchLoginUIListener {
         }
 ```
 
+* 接入用户收藏界面，[参考](../app/src/main/java/com/fox/one/demo/ExchangeActivity.kt)
+
+```kotlin
+
+supportFragmentManager.beginTransaction()
+            .replace(R.id.container_exchange, favFragment)
+            .commitAllowingStateLoss()
+
+        favFragment.onEmptyViewClick = {
+            if (AccountManager.isLogin()) {
+                MarketActivity.start(this@ExchangeActivity)
+            } else {
+                AccountManager.launchLoginUI(this)
+            }
+        }
+
+```
+
+* 接口用户钱包界面
+
+```kotlin
+
+WalletActivity.start(this@MainActivity)
+
+```
+
 * 设置UI样式
 
 ```
