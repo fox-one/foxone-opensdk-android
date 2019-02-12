@@ -92,6 +92,6 @@ UploadAPI.uploadFile(UploadAPI.createUploadReqBody(File))
      * @param bodyString 如果请求有Body，把body转成json字符串（body一般都是json对象）
      * @return [SignResult] 返回新的url及签名(sign)，后续请求使用新的url请求[SignResult.newUrl]，在请求的header加上jwt token签名[SignResult.sign]，e.g., Authorization:Bearer 12334ea234323534
      */
-    fun sign(method: String, url: String, timeInSecond: Long, nonce: String, bodyString: String)
+    fun sign(method: String, url: String, timeInSecond: Long, nonce: String, bodyString: String): SignResult
     
 ```
