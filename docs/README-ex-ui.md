@@ -6,21 +6,21 @@
 
 * 依赖
 
-```
+```groovy
 implementation 'com.fox.one:ex-ui:1.2.2'
 ```
 查看[最新版本](http://jcenter.bintray.com/com/fox/one/ex-ui)
 
 * 初始化
 
-```
+```kotlin
 //在application.onCreate方法里添加如下代码
 ExModule.init(this)
 ```
 
 * 设置登录状态失效时跳转登录界面逻辑
 
-```
+```kotlin
 //当接口返回KYC认证失败时，通知用户相应的状态信息，并根据业务需求做相应处理
 ExModule.setOnKYCCheckListener { context, status ->
             when(status) {
@@ -48,7 +48,7 @@ ExModule.setOnKYCCheckListener { context, status ->
 
 * 设置KYC认证失败时对应错误处理逻辑
 
-```
+```kotlin
 //当接口返回http code为401错误（用户认证失败）时，跳转登录界面叫用户重新登录
 ExModule.setOnLaunchLoginUIListener {
             LoginActivity.start(it)
@@ -81,11 +81,9 @@ WalletActivity.start(this@MainActivity)
 
 ```
 
-* 设置UI样式
+* 设置UI样式。自定义UI样式，继承自Theme.F1EX.Day，并设置相应属性
 
-```
-//自定义UI样式，继承自Theme.F1EX.Day，并设置相应属性
-
+```xml
  <style name="DemoTheme" parent="Theme.F1EX.Day">
         <!--app 主背景色-->
         <item name="f1exBackgroundColor">@color/background_color_day</item>
@@ -124,9 +122,13 @@ WalletActivity.start(this@MainActivity)
         <!--设置：通用设置图标-->
         <item name="f1exSetting">@drawable/ic_setting</item>
     </style>
-    
-//在Manifest里设置样式
 
+```
+
+* 在AndroidManifest.xml里应用样式
+
+```xml
+<!--在Manifest里设置样式-->
 <application
             android:name=".DemoApp"
             android:allowBackup="true"
@@ -134,6 +136,5 @@ WalletActivity.start(this@MainActivity)
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/DemoTheme">
-
+            android:theme="@style/DemoTheme"></application>
 ```
