@@ -82,7 +82,7 @@ object FoxSDK {
         CurrencyRateManager.init(application)
     }
 
-    private const val HEADER_MERCHANT_ID = "fox-cloud-merchant-id"
+    private const val HEADER_MERCHANT_ID = "fox-merchant-id"
 
     data class Options(var logEnable: Boolean, var debugEnable: Boolean, var env: Enviroment): Serializable {
 

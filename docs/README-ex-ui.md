@@ -84,44 +84,54 @@ WalletActivity.start(this@MainActivity)
 * 设置UI样式。自定义UI样式，继承自Theme.F1EX.Day，并设置相应属性
 
 ```xml
- <style name="DemoTheme" parent="Theme.F1EX.Day">
-        <!--app 主背景色-->
-        <item name="f1exBackgroundColor">@color/background_color_day</item>
-        <!--app 第二背景色，一般为浮层块背景色，如卡片-->
-        <item name="f1exBackgroundSecondColor">@color/background_second_color_day</item>
-        <!--app 第三背景色，一般为浮层块上面的浮层块背景色(第三层)-->
-        <item name="f1exBackgroundThirdColor">@color/background_third_color_day</item>
-        <!--主前景色-->
-        <item name="f1exPrimaryColor">@color/primary_color_day</item>
-        <!--第二前景色-->
-        <item name="f1exSecondColor">@color/second_color_day</item>
-        <!--主文字前景色-->
-        <item name="f1exTextPrimaryColor">@color/text_primary_color_day</item>
-        <!--第二文字前景色，比如副标-->
-        <item name="f1exTextSecondColor">@color/text_second_color_day</item>
-        <!--分割线颜色-->
-        <item name="f1exDividerColor">@color/divider_color_day</item>
-        <!--错误警告色-->
-        <item name="f1exErrorColor">@color/error_color_day</item>
-        <!--状态栏颜色-->
-        <item name="f1exStatusBarColor">@color/status_color_day</item>
-        <!--ActionBar颜色-->
-        <item name="f1exActionBarColor">@color/action_bar_color_day</item>
-        <!--添加按钮图标-->
-        <item name="f1exIconAdd">@drawable/ic_add_black</item>
-        <!--搜索按钮图标-->
-        <item name="f1exIconSearch">@drawable/ic_search_black</item>
-        <!--历史按钮图标-->
-        <item name="f1exIconHistory">@drawable/ic_history_black</item>
-        <!--左上角返回按钮图标-->
-        <item name="f1exIconBack">@drawable/ic_back_black</item>
-        <!--loading图标-->
-        <item name="f1exIconLoading">@drawable/spinner_black</item>
-        <!--设置：交易图标-->
-        <item name="f1exExchange">@drawable/ic_exchange</item>
-        <!--设置：通用设置图标-->
-        <item name="f1exSetting">@drawable/ic_setting</item>
-    </style>
+ <style name="Theme.F1EX.Day" parent="Theme.F1EX.Base">
+         <!--app 主背景色-->
+         <item name="f1exBackgroundColor">@color/background_color_day</item>
+         <!--app 第二背景色，一般为浮层块背景色，如卡片-->
+         <item name="f1exBackgroundSecondColor">@color/background_second_color_day</item>
+         <!--app 第三背景色，一般为浮层块上面的浮层块背景色(第三层)-->
+         <item name="f1exBackgroundThirdColor">@color/background_third_color_day</item>
+         <!--主前景色-->
+         <item name="f1exPrimaryColor">@color/primary_color_day</item>
+         <!--第二前景色-->
+         <item name="f1exSecondColor">@color/second_color_day</item>
+         <!--主文字前景色-->
+         <item name="f1exTextPrimaryColor">@color/text_primary_color_day</item>
+         <!--第二文字前景色，比如副标-->
+         <item name="f1exTextSecondColor">@color/text_second_color_day</item>
+         <!--分割线颜色-->
+         <item name="f1exDividerColor">@color/divider_color_day</item>
+         <!--错误警告色-->
+         <item name="f1exErrorColor">@color/error_color_day</item>
+         <!--状态栏颜色-->
+         <item name="f1exStatusBarColor">@color/status_color_day</item>
+         <!--ActionBar颜色-->
+         <item name="f1exActionBarColor">@color/action_bar_color_day</item>
+         <!--添加按钮图标-->
+         <item name="f1exIconAdd">@drawable/ic_add_black</item>
+         <!--搜索按钮图标-->
+         <item name="f1exIconSearch">@drawable/ic_search_black</item>
+         <!--历史按钮图标-->
+         <item name="f1exIconHistory">@drawable/ic_history_black</item>
+         <!--左上角返回按钮图标-->
+         <item name="f1exIconBack">@drawable/ic_back_black</item>
+         <!--loading图标-->
+         <item name="f1exIconLoading">@drawable/spinner_black</item>
+         <!--设置：交易图标-->
+         <item name="f1exIconExchange">@drawable/ic_me_my_orders</item>
+         <!--设置：通用设置图标-->
+         <item name="f1exIconSetting">@drawable/ic_setting_black</item>
+         <!--withdraw图标-->
+         <item name="f1exIconWithdraw">@drawable/ic_withdraw_day</item>
+         <!--deposit图标-->
+         <item name="f1exIconDeposit">@drawable/ic_deposit_day</item>
+         <!--向下箭头图标-->
+         <item name="f1exIconArrowDown">@drawable/ic_arrow_down_day</item>
+         <!--CAMERA图标-->
+         <item name="f1exIconCamera">@drawable/ic_camera_day</item>
+         <!--QRCode图标-->
+         <item name="f1exIconQRCode">@drawable/ic_qrcode_day</item>
+     </style>
 
 ```
 

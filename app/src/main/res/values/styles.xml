@@ -38,6 +38,8 @@
         <item name="f1exExchange">@drawable/ic_exchange</item>
         <!--设置：通用设置图标-->
         <item name="f1exSetting">@drawable/ic_setting</item>
+
+        <item name="demoAttr1">#ffffff</item>
     </style>
 
 </resources>

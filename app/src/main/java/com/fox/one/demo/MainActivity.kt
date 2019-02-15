@@ -2,6 +2,7 @@ package com.fox.one.demo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Button
 import com.fox.one.ex.core.stream.AllTickerStreamObserver
 import com.fox.one.ex.core.stream.StreamDataManager
@@ -10,6 +11,7 @@ import com.fox.one.ex.core.stream.model.AllTickerStreamReqBody
 import com.fox.one.ex.core.stream.model.StreamAction
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
+import com.fox.one.support.common.extension.getColorCompat
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.APPLifeCycleManager
@@ -65,9 +67,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_wallet).setOnClickListener {
-//            if (AccountManager.isLogin()) {
+            if (AccountManager.isLogin()) {
                 WalletActivity.start(this@MainActivity)
-//            }
+            }
         }
     }
 

@@ -14,9 +14,9 @@ import okhttp3.OkHttpClient
  */
 object ExFavAPI: IExFavAPI {
 
-    const val ALPHA_URL = "https://dev-cloud.fox.one"
-    const val BETA_URL = "https://cloudapi.fox.one"
-    const val RELEASE_URL = "https://cloudapi.fox.one"
+    const val ALPHA_URL = "https://dev-gateway.fox.one"
+    const val BETA_URL = "https://openapi.fox.one"
+    const val RELEASE_URL = "https://openapi.fox.one"
 
     var apiLoader = APILoader()
 
