@@ -7,7 +7,7 @@ payment SDK 提供数字资产的基本钱包功能，包括但不限于转账�
 * 依赖
 
 ```
-implementation 'com.fox.one:pay:0.1.8'
+implementation 'com.fox.one:pay:0.2.4'
 ```
 查看[最新版本](http://jcenter.bintray.com/com/fox/one/ex-ui)
 
