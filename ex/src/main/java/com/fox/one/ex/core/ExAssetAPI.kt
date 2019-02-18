@@ -13,7 +13,6 @@ import okhttp3.OkHttpClient
  * @since 2019-01-23
  */
 object ExAssetAPI: IExAssetAPI {
-
     override fun getAssets(): FoxCall<List<AssetInfo>> {
         return apiLoader.load(IExAssetAPI::class.java)
             .getAssets()
@@ -58,6 +57,11 @@ object ExAssetAPI: IExAssetAPI {
     }
 
     override fun transfer(request: TransferReqBody): FoxCall<SnapshotResponse> {
+        return apiLoader.load(IExAssetAPI::class.java)
+            .transfer(request)
+    }
+
+    override fun transfer(request: ServiceTransferReqBody): FoxCall<SnapshotResponse> {
         return apiLoader.load(IExAssetAPI::class.java)
             .transfer(request)
     }

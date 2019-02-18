@@ -46,4 +46,7 @@ interface IExAssetAPI {
 
     @POST("/member/exchange/transfer")
     fun transfer(@Body request: TransferReqBody): FoxCall<SnapshotResponse>
+
+    @POST("/member/exchange/service-transfer")
+    fun transfer(@Body request: ServiceTransferReqBody): FoxCall<SnapshotResponse>
 }

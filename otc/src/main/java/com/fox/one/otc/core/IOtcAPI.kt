@@ -10,23 +10,23 @@ import retrofit2.http.*
  * @version 1.0.0
  * @since 2019-01-23
  */
-interface IPayAPI {
+interface IOtcAPI {
     /**
      * 获取用户的所有资产（资产列表）
      */
-    @GET("/member/payment/assets")
+    @GET("/member/otc/assets")
     fun getAssets(): FoxCall<List<AssetInfo>>
 
     /**
      * 获取支持转入的资产列表
      */
-    @GET("/member/payment/assets?chain=1")
+    @GET("/member/otc/assets?chain=1")
     fun getMainChainAssets(): FoxCall<List<AssetInfo>>
 
     /**
      * 获取单个资产详情
      */
-    @GET("/member/payment/asset/{assetId}")
+    @GET("/member/otc/asset/{assetId}")
     fun getAsset(@Path("assetId") assetId: String): FoxCall<AssetResponse>
 
     /**
@@ -34,21 +34,21 @@ interface IPayAPI {
      * [assetId]: 传null或者空字符串时，获取所有的转账记录。
      * [order]: "ASC", "DESC"
      */
-    @GET("/member/payment/snapshots")
+    @GET("/member/otc/snapshots")
     fun getSnapshots(@Query("asset_id") assetId: String?, @Query("cursor") cursor: String?, @Query("limit") limit: Int = 20, @Query("order") order: String = "DESC"): FoxCall<SnapshotArrayResponse>
 
-    @GET("/member/payment/snapshot/{snapshotId}")
+    @GET("/member/otc/snapshot/{snapshotId}")
     fun getSnapshotDetail(@Path("snapshotId") snapshotId: String): FoxCall<SnapshotResponse>
 
     /**
      * 提现接口(转出)
      */
-    @POST("/member/payment/withdraw")
+    @POST("/member/otc/withdraw")
     fun withdraw(@Body request: WithdrawReqBody): FoxCall<SnapshotResponse>
 
-    @POST("/member/payment/transfer")
+    @POST("/member/otc/transfer")
     fun transfer(@Body request: TransferReqBody): FoxCall<SnapshotResponse>
 
-    @POST("/member/payment/service-transfer")
+    @POST("/member/otc/service-transfer")
     fun transfer(@Body request: ServiceTransferReqBody): FoxCall<SnapshotResponse>
 }

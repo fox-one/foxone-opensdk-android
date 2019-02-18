@@ -1,1 +1,1 @@
-include ':app', 'cloud', 'ex', 'passport', 'payment', 'support-common', 'support-component', 'support-framework'
+include ':app', ':otc', 'cloud', 'ex', 'passport', 'payment', 'support-common', 'support-component', 'support-framework'
