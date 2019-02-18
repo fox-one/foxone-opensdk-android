@@ -27,6 +27,11 @@
             android:layout_width="match_parent"
             style="@style/Theme.PrimaryButton"
             android:text="用户信息"/>
+    <android.support.design.button.MaterialButton
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            style="@style/Theme.PrimaryButton"
+            android:text="登出"/>
 
     <android.support.design.button.MaterialButton
         android:id="@+id/btn_exchange"

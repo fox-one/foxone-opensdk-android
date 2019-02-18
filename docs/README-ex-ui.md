@@ -7,7 +7,7 @@
 * 依赖
 
 ```groovy
-implementation 'com.fox.one:ex-ui:1.2.4'
+implementation 'com.fox.one:ex-ui:1.2.6'
 ```
 查看[最新版本](http://jcenter.bintray.com/com/fox/one/ex-ui)
 
@@ -53,6 +53,30 @@ ExModule.setOnKYCCheckListener { context, status ->
 ExModule.setOnLaunchLoginUIListener {
             LoginActivity.start(it)
         }
+```
+
+* 注入Account信息
+
+```kotlin
+//当用户登录成功时，注入登录信息
+AccountManager.login(AccountInfo)
+
+```
+
+* 登出
+
+```kotlin
+//当用户登出时，清除登录状态信息
+AccountManager.logout()
+
+```
+
+* 清除缓存Cache
+
+```kotlin
+//当切换新的用户登录时，调用该接口清除上个用户的缓存数据
+ExModule.cleanCache()
+
 ```
 
 * 接入用户收藏界面，[参考](../app/src/main/java/com/fox/one/demo/ExchangeActivity.kt)

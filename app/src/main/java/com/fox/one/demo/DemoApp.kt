@@ -4,15 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.fox.one.cloud.FoxSDK
-import com.fox.one.passport.core.PassportAPI
-import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.passport.core.model.KYCStatus
-import com.fox.one.support.common.utils.JsonUtils
-import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.common.utils.ToastUtil
 import com.fox.one.support.framework.Enviroment
-import com.fox.one.support.framework.FoxPreference
-import com.fox.one.support.framework.imageloader.ImageLoader
 import com.foxone.exchange.ex.ExModule
 
 /**

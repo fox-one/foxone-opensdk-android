@@ -11,11 +11,13 @@ import com.fox.one.ex.core.stream.model.AllTickerStreamReqBody
 import com.fox.one.ex.core.stream.model.StreamAction
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
+import com.fox.one.passport.core.model.BasePassportResponse
 import com.fox.one.support.common.extension.getColorCompat
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.APPLifeCycleManager
 import com.fox.one.support.framework.network.HttpErrorHandler
+import com.foxone.exchange.ex.ExModule
 import com.foxone.exchange.ex.wallet.WalletActivity
 import com.foxone.exchange.framework.account.AccountManager
 import retrofit2.Call
@@ -60,6 +62,23 @@ class MainActivity : AppCompatActivity() {
 
                 })
 //            }
+        }
+
+        findViewById<Button>(R.id.btn_logout).setOnClickListener {
+            PassportAPI.logout()
+                .enqueue(object: Callback<BasePassportResponse> {
+                    override fun onFailure(call: Call<BasePassportResponse>, t: Throwable) {
+
+                    }
+
+                    override fun onResponse(
+                        call: Call<BasePassportResponse>,
+                        response: Response<BasePassportResponse>
+                    ) {
+                        AccountManager.logout()
+                        ExModule.cleanCache()
+                    }
+                })
         }
 
         findViewById<Button>(R.id.btn_exchange).setOnClickListener {

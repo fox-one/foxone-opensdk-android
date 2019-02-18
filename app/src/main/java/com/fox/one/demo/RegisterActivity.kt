@@ -98,6 +98,7 @@ class RegisterActivity: AppCompatActivity() {
                     override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
                         AccountManager.login(response.body() ?: AccountInfo())
                         LogUtils.i("foxone", "userInfo: ${JsonUtils.optToJson(response.body())}")
+                        finish()
                     }
                 })
         }

@@ -86,6 +86,7 @@ class SMSLoginActivity: AppCompatActivity() {
                 override fun onResponse(call: Call<AccountInfo>, response: Response<AccountInfo>) {
                     AccountManager.login(response.body() ?: AccountInfo())
                     LogUtils.i("foxone", "sms login: ${JsonUtils.optToJson(response.body())}")
+                    finish()
                 }
             })
         }
