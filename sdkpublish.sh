@@ -5,7 +5,7 @@ echo "start sdk packaging and publishing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PROJECT_PATH=`pwd`
 echo "project dir:: ${PROJECT_PATH}"
 
-for m in support-common support-component support-framework passport payment ex cloud; do
+for m in support-common support-component support-framework passport payment ex otc cloud; do
     curPath="${PROJECT_PATH}/${m}"
     echo "now working at ${curPath} --------------"
 

@@ -12,6 +12,7 @@ import com.fox.one.ex.core.stream.model.StreamAction
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.passport.core.model.BasePassportResponse
+import com.fox.one.pay.core.OtcAPI
 import com.fox.one.support.common.extension.getColorCompat
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils

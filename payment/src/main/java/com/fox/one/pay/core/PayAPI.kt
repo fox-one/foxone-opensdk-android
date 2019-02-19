@@ -58,6 +58,11 @@ object PayAPI: IPayAPI {
             .transfer(request)
     }
 
+    override fun httCredits(): FoxCall<Credits> {
+        return apiLoader.load(IPayAPI::class.java)
+            .httCredits()
+    }
+
     const val ALPHA_URL = "https://dev-gateway.fox.one"
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"

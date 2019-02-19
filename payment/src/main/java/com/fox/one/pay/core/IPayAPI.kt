@@ -51,4 +51,7 @@ interface IPayAPI {
 
     @POST("/member/payment/service-transfer")
     fun transfer(@Body request: ServiceTransferReqBody): FoxCall<SnapshotResponse>
+
+    @GET("/member/payment/htt-credits")
+    fun httCredits(): FoxCall<Credits>
 }
