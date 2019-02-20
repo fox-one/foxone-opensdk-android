@@ -7,7 +7,7 @@
 * 依赖
 
 ```groovy
-implementation 'com.fox.one:ex-ui:1.2.6'
+implementation 'com.fox.one:ex-ui:1.2.7'
 ```
 查看[最新版本](http://jcenter.bintray.com/com/fox/one/ex-ui)
 
