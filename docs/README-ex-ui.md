@@ -97,12 +97,18 @@ supportFragmentManager.beginTransaction()
 
 ```
 
-* 接口用户钱包界面
+* 接入用户钱包界面
 
 ```kotlin
 
 WalletActivity.start(this@MainActivity)
 
+```
+
+* 接入资金划转功能
+
+```kotlin
+TransferActivity.start(Context)
 ```
 
 * 设置UI样式。自定义UI样式，继承自Theme.F1EX.Day，并设置相应属性
