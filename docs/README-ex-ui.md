@@ -111,6 +111,12 @@ WalletActivity.start(this@MainActivity)
 TransferActivity.start(Context)
 ```
 
+* 接入KYC认证界面
+
+```kotlin
+ExModule.startKYCActivity(this@MainActivity)
+```
+
 * 设置UI样式。自定义UI样式，继承自Theme.F1EX.Day，并设置相应属性
 
 ```xml

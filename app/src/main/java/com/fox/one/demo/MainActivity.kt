@@ -18,8 +18,10 @@ import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.APPLifeCycleManager
 import com.fox.one.support.framework.network.HttpErrorHandler
+import com.foxone.exchange.account.kyc.KYCActivity
 import com.foxone.exchange.ex.ExModule
 import com.foxone.exchange.ex.wallet.WalletActivity
+import com.foxone.exchange.ex.wallet.transfer.TransferActivity
 import com.foxone.exchange.framework.account.AccountManager
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_user_info).setOnClickListener {
-//            if (AccountManager.isLogin()) {
+            if (AccountManager.isLogin()) {
                 PassportAPI.getAccountInfo().enqueue(object: Callback<AccountInfo> {
                     override fun onFailure(call: Call<AccountInfo>, t: Throwable) {
                         HttpErrorHandler.handle(t)
@@ -62,7 +64,9 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
-//            }
+            } else {
+                AccountManager.launchLoginUI(this@MainActivity)
+            }
         }
 
         findViewById<Button>(R.id.btn_logout).setOnClickListener {
@@ -89,6 +93,24 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_wallet).setOnClickListener {
             if (AccountManager.isLogin()) {
                 WalletActivity.start(this@MainActivity)
+            } else {
+                AccountManager.launchLoginUI(this@MainActivity)
+            }
+        }
+
+        findViewById<Button>(R.id.btn_transfer).setOnClickListener {
+            if (AccountManager.isLogin()) {
+                TransferActivity.start(this@MainActivity)
+            } else {
+                AccountManager.launchLoginUI(this@MainActivity)
+            }
+        }
+
+        findViewById<Button>(R.id.btn_kyc).setOnClickListener {
+            if (AccountManager.isLogin()) {
+                ExModule.startKYCActivity(this@MainActivity)
+            } else {
+                AccountManager.launchLoginUI(this@MainActivity)
             }
         }
     }

@@ -51,7 +51,7 @@ dependencies {
     implementation 'commons-codec:commons-codec:1.10'
     implementation 'org.apache.commons:commons-compress:1.12'
 
-    api('com.fox.one:ex-ui:1.2.6') {
+    api('com.fox.one:ex-ui:1.3.3') {
         exclude module: 'support-common'
         exclude module: 'support-framework'
         exclude module: 'passport'
