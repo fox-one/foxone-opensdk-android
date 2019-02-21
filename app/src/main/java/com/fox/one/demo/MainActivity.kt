@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        LogUtils.i("foxone", "MainActivity.onCreate")
         findViewById<Button>(R.id.btn_register).setOnClickListener {
             RegisterActivity.start(this@MainActivity)
         }

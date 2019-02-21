@@ -5,9 +5,13 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import com.fox.one.cloud.FoxSDK
 import com.fox.one.passport.core.model.KYCStatus
+import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.common.utils.ToastUtil
+import com.fox.one.support.framework.APPLifeCycleManager
+import com.fox.one.support.framework.AppLifecycleCallback
 import com.fox.one.support.framework.Enviroment
 import com.foxone.exchange.ex.ExModule
+import com.foxone.exchange.framework.app.F1EXTheme
 
 /**
  * class description here
