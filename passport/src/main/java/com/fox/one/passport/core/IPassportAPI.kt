@@ -94,4 +94,16 @@ interface IPassportAPI {
      */
     @POST("/api/account/reset_password")
     fun resetPassword(@Body request: ResetPasswordReqBody): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/tfa/request")
+    fun requestTFA():FoxCall<TFAResponse>
+
+    @POST("/api/account/tfa/on")
+    fun enableTFA(@Body request: TFAReqBody): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/tfa/off")
+    fun disableTFA(@Body request: TFAReqBody): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/login_tfa")
+    fun login(@Body request: TFALoginReqBody): FoxCall<AccountInfo>
 }

@@ -34,10 +34,11 @@ data class AccountInfo(
         @SerializedName("merchant_id") var merchantId: String,
         @SerializedName("name") var name: String,
         @SerializedName("is_password_set") var hasPassword: Boolean,
+        @SerializedName("is_tfa_enable") var isTFAEnable: Boolean,
         @SerializedName("phone_code") var countryCode: String,
         @SerializedName("phone_number") var phoneNumber: String,
         @SerializedName("email") var email: String,
         @SerializedName("push_id") var pushId: String) : Serializable {
-        constructor() : this(0, 0, "", "", "", "", false, "", "", "", "")
+        constructor() : this(0, 0, "", "", "", "", false, false, "", "", "", "")
     }
 }

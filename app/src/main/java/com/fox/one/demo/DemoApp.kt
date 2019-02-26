@@ -3,6 +3,7 @@ package com.fox.one.demo
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import android.util.TypedValue
 import com.fox.one.cloud.FoxSDK
 import com.fox.one.passport.core.model.KYCStatus
 import com.fox.one.support.common.utils.LogUtils

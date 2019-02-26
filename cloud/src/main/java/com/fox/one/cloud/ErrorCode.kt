@@ -155,4 +155,20 @@ object ErrorCode {
     const val WS_UNKNOWN_MARKET = 10013
     const val WS_UNKNOWN_KLINE_INTERVAL = 10022
     const val WS_UNKNOWN_DEPTH_LEVEL = 10023
+    /**
+     * 需要两步验证
+     */
+    const val TFA_REQUIRED = 1110
+    /**
+     * 两步验证失败
+     */
+    const val TFA_FAILED = 1111
+    /**
+     * 两步验证已开启
+     */
+    const val TFA_ALREADY_ENABLED = 1112
+    /**
+     * 两步验证未开启
+     */
+    const val TFA_DISABLED = 1113
 }
