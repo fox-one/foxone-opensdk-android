@@ -9,6 +9,7 @@ import com.fox.one.support.framework.APPLifeCycleManager
 import com.fox.one.support.framework.AppLifecycleCallback
 import com.fox.one.support.framework.Enviroment
 import com.fox.one.support.framework.FoxRuntime
+import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.HttpEngine
 import com.fox.one.support.framework.network.HttpErrorHandler
 import okhttp3.Interceptor
@@ -67,6 +68,8 @@ object FoxSDK {
             return@Interceptor it.proceed(newRequestBuilder.build())
         }
 
+        APILoader.customBaseUrl = options?.customBaseUrl
+
         //init app life cycle
         APPLifeCycleManager.registAppLifecycleCallback(object: AppLifecycleCallback {
             override fun onAppGoToBackGround() {
@@ -84,7 +87,7 @@ object FoxSDK {
 
     private const val HEADER_MERCHANT_ID = "fox-merchant-id"
 
-    data class Options(var logEnable: Boolean, var debugEnable: Boolean, var env: Enviroment): Serializable {
+    data class Options(var logEnable: Boolean, var debugEnable: Boolean, var env: Enviroment, var customBaseUrl: APILoader.BaseUrl?): Serializable {
 
     }
 }

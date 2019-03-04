@@ -21,6 +21,7 @@ import java.net.URL
  * @since 2019-01-21
  */
 object PassportAPI: IPassportAPI, IKYCAPI {
+
     const val ALPHA_URL = "https://dev-gateway.fox.one"
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"
@@ -138,9 +139,9 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .requestCaptcha()
     }
 
-    override fun loginWithSMSCode(request: LoginWithSMSReqBody): FoxCall<AccountInfo> {
+    override fun login(request: LoginWithSMSReqBody): FoxCall<AccountInfo> {
         return apiLoader.load(IPassportAPI::class.java)
-            .loginWithSMSCode(request)
+            .login(request)
     }
 
     override fun requestCodeOfSMSLogin(request: SMSCodeReqBody): FoxCall<ValidCodeResponse> {
@@ -176,6 +177,26 @@ object PassportAPI: IPassportAPI, IKYCAPI {
     override fun getKYCProfile(): FoxCall<KYCProfileResponse> {
         return apiLoader.load(IKYCAPI::class.java)
             .getKYCProfile()
+    }
+
+    override fun requestTFA(): FoxCall<TFAResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestTFA()
+    }
+
+    override fun enableTFA(request: TFAReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .enableTFA(request)
+    }
+
+    override fun disableTFA(request: TFAReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .disableTFA(request)
+    }
+
+    override fun login(request: TFALoginReqBody): FoxCall<AccountInfo> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .login(request)
     }
 
     data class SignResult(var newUrl: String, var sign: String): Serializable {

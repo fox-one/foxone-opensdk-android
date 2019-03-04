@@ -18,6 +18,7 @@ import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
+import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -31,15 +32,17 @@ object StreamDataManager {
 
     private const val TAG = "StreamDataManager"
 
-    private const val ALPHA_URL = "wss://dev-gateway.fox.one/ws"
-    private const val BETA_URL = "wss://gateway.fox.one/ws"
-    private const val RELEASE_URL = "wss://gateway.fox.one/ws"
+    private const val ALPHA_URL = "https://dev-gateway.fox.one"
+    private const val BETA_URL = "https://gateway.fox.one"
+    private const val RELEASE_URL = "https://gateway.fox.one"
+
+    private const val PATH_WS = "/ws"
 
     private val handler = StreamHandler()
 
     private val observers: MutableMap<String, StreamObserver<*, *>> = ConcurrentHashMap()
 
-    private val baseUrl = APILoader.BaseUrl(alphaUrl = ALPHA_URL, betaUrl = BETA_URL, releaseUrl = RELEASE_URL)
+    private val apiLoader = APILoader()
     private var webSocketEngine: WebSocketEngine?= null
 
     @Volatile
@@ -92,8 +95,18 @@ object StreamDataManager {
         }
     }
 
+    private fun getRealUrl(): String {
+        val url = URL(apiLoader.getBaseUrl())
+        val host = url.host
+        return "wss://$host$PATH_WS"
+    }
+
     init {
-        webSocketEngine = WebSocketEngine(getUrl(), okHttpClient, webSocketListener)
+        apiLoader.setOkHttp(okHttpClient)
+        apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
+        webSocketEngine = WebSocketEngine(getRealUrl(), okHttpClient, webSocketListener)
+
+        LogUtils.i("foxone", "websocket: ${getRealUrl()}")
     }
 
     fun dispatchMessage(message: String) {
@@ -171,7 +184,7 @@ object StreamDataManager {
 
     fun reset() {
         close()
-        webSocketEngine = WebSocketEngine(getUrl(), okHttpClient, webSocketListener)
+        webSocketEngine = WebSocketEngine(getRealUrl(), okHttpClient, webSocketListener)
     }
 
     private fun close() {
@@ -184,20 +197,6 @@ object StreamDataManager {
         handler.removeMessages(WHAT_CLOSE)
 
         LogUtils.i(TAG, "websocket close>>>>>>>>>>>>>>")
-    }
-
-    private fun getUrl(): String {
-        return when (FoxRuntime.env) {
-            Enviroment.RELEASE -> {
-                baseUrl.releaseUrl
-            }
-            Enviroment.BETA -> {
-                baseUrl.betaUrl
-            }
-            Enviroment.ALPHA -> {
-                baseUrl.alphaUrl
-            }
-        }
     }
 
     private fun tryConnect() {

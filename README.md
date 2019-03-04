@@ -11,7 +11,7 @@ Fox.ONE开放平台SDK是一套区块链支付、结算、交易的系统解决�
 * 依赖 `cloud` sdk
 
 ```
-implementation 'com.fox.one:cloud:0.2.4'
+implementation 'com.fox.one:cloud:0.3.6'
 ```
 查看[最新版本](http://jcenter.bintray.com/com/fox/one/cloud)
 
@@ -22,7 +22,8 @@ implementation 'com.fox.one:cloud:0.2.4'
 //Options.logEnable: log开关
 //Options.debugEnable: debug开关
 //Options.env: 环境设置，建议开发中设置为Enviroment.ALPHA，在产品代码中设置为Enviroment.ALPHA
-FoxSDK.init(this, MERCHANT_ID, FoxSDK.Options(logEnable = true, debugEnable = true, env = Enviroment.ALPHA))
+//Options.customBaseUrl: 自定义接口域名，APILoader.BaseUrl(alphaUrl"https://xxx.xxx.xxx", BetaUrl"https://xxx.xxx.xxx", releaseUrl="https://xxx.xxx.xxx")
+FoxSDK.init(this, MERCHANT_ID, FoxSDK.Options(logEnable = true, debugEnable = true, env = Enviroment.ALPHA, customBaseUrl=null))
 
 ```
 

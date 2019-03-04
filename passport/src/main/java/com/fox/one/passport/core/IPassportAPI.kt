@@ -42,7 +42,7 @@ interface IPassportAPI {
      * 通过短信验证码快速登录
      */
     @POST("/api/account/login_phone")
-    fun loginWithSMSCode(@Body request: LoginWithSMSReqBody): FoxCall<AccountInfo>
+    fun login(@Body request: LoginWithSMSReqBody): FoxCall<AccountInfo>
 
     /**
      * 获取短信登录的短信验证码

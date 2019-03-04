@@ -73,7 +73,7 @@ class SMSLoginActivity: AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_login).setOnClickListener {
             val code = findViewById<EditText>(R.id.edt_sms_code).text.toString()
-            PassportAPI.loginWithSMSCode(
+            PassportAPI.login(
                 LoginWithSMSReqBody(
                     token = smsToken,
                     smsCode = code

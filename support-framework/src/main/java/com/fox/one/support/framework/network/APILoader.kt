@@ -83,9 +83,9 @@ class APILoader {
 
     fun getBaseUrl(): String {
         return when (FoxRuntime.env) {
-            Enviroment.RELEASE -> baseUrl.releaseUrl
-            Enviroment.BETA -> baseUrl.betaUrl
-            Enviroment.ALPHA -> baseUrl.alphaUrl
+            Enviroment.RELEASE -> customBaseUrl?.releaseUrl ?: baseUrl.releaseUrl
+            Enviroment.BETA -> customBaseUrl?.betaUrl ?: baseUrl.betaUrl
+            Enviroment.ALPHA -> customBaseUrl?.alphaUrl ?: baseUrl.alphaUrl
         }
     }
 
@@ -99,7 +99,7 @@ class APILoader {
     }
 
     companion object {
-        var defaultBaseUrl: BaseUrl = BaseUrl()
+        var customBaseUrl: BaseUrl? = BaseUrl()
     }
 
     internal class MainThreadExecutor : Executor {

@@ -17,6 +17,7 @@ import com.fox.one.support.common.extension.getColorCompat
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.APPLifeCycleManager
+import com.fox.one.support.framework.network.ErrorResponse
 import com.fox.one.support.framework.network.HttpErrorHandler
 import com.foxone.exchange.account.kyc.KYCActivity
 import com.foxone.exchange.ex.ExModule
@@ -108,11 +109,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_kyc).setOnClickListener {
-            if (AccountManager.isLogin()) {
-                ExModule.startKYCActivity(this@MainActivity)
-            } else {
-                AccountManager.launchLoginUI(this@MainActivity)
-            }
+//            if (AccountManager.isLogin()) {
+//                ExModule.startKYCActivity(this@MainActivity)
+//            } else {
+//                AccountManager.launchLoginUI(this@MainActivity)
+//            }
+            val str = "{\n" +
+                    "  \"code\": 1110,\n" +
+                    "  \"msg\": \"2-Step verification required\",\n" +
+                    "  \"data\": {\n" +
+                    "    \"tfa_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHAiOiIyZmEgbG9naW4iLCJleHAiOjE1NTExNjc4NzB9.4up5L4315b7UVCrJddBg_6TbYIBS5KGHy0AHYG6_ZiU\"\n" +
+                    "  }\n" +
+                    "}"
+
+            val data = JsonUtils.optFromJson(str, ErrorResponse::class.java)
+
+            LogUtils.i("foxone", "tfa_token: ${data.data?.get("tfa_token").toString()}")
         }
     }
 
