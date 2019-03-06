@@ -1,5 +1,6 @@
 package com.fox.one.demo
 
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
@@ -114,18 +115,36 @@ class MainActivity : AppCompatActivity() {
 //            } else {
 //                AccountManager.launchLoginUI(this@MainActivity)
 //            }
-            val str = "{\n" +
-                    "  \"code\": 1110,\n" +
-                    "  \"msg\": \"2-Step verification required\",\n" +
-                    "  \"data\": {\n" +
-                    "    \"tfa_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHAiOiIyZmEgbG9naW4iLCJleHAiOjE1NTExNjc4NzB9.4up5L4315b7UVCrJddBg_6TbYIBS5KGHy0AHYG6_ZiU\"\n" +
-                    "  }\n" +
-                    "}"
+//            val str = "{\n" +
+//                    "  \"code\": 1110,\n" +
+//                    "  \"msg\": \"2-Step verification required\",\n" +
+//                    "  \"data\": {\n" +
+//                    "    \"tfa_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHAiOiIyZmEgbG9naW4iLCJleHAiOjE1NTExNjc4NzB9.4up5L4315b7UVCrJddBg_6TbYIBS5KGHy0AHYG6_ZiU\"\n" +
+//                    "  }\n" +
+//                    "}"
+//
+//            val data = JsonUtils.optFromJson(str, ErrorResponse::class.java)
+//
+//            LogUtils.i("foxone", "tfa_token: ${data.data?.get("tfa_token").toString()}")
 
-            val data = JsonUtils.optFromJson(str, ErrorResponse::class.java)
+            DEVAPI.Impl.requestDevices()
+                .enqueue(object: Callback<Any> {
+                    override fun onFailure(call: Call<Any>, t: Throwable) {
+                        HttpErrorHandler.handle(t)
+                    }
 
-            LogUtils.i("foxone", "tfa_token: ${data.data?.get("tfa_token").toString()}")
+                    override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                        LogUtils.i("foxone", "devices:::${JsonUtils.optToJson(response.body())}")
+                    }
+
+                })
         }
+
+        LogUtils.i("foxone", "brand:${Build.BRAND}, board:${Build.BOARD}, device:${Build.DEVICE}, model:${Build.MODEL}, " +
+                "display:${Build.DISPLAY}, bootloader:${Build.BOOTLOADER}, fingerprint:${Build.FINGERPRINT}, " +
+                "hardware:${Build.HARDWARE}, product:${Build.PRODUCT}, id:${Build.ID}, host:${Build.HOST}")
+        LogUtils.i("foxone", " radioVersion:${Build.getRadioVersion()}, " +
+                "                release: ${Build.VERSION.RELEASE}, base_os: ${Build.VERSION.BASE_OS}, sdk_int: ${Build.VERSION.SDK_INT}, codename: ${Build.VERSION.CODENAME}")
     }
 
     private var subIdOfAllTicker: String = ""

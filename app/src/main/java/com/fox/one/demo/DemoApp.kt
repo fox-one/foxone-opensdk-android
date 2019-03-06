@@ -30,7 +30,7 @@ class DemoApp: Application() {
 
         //初始Fox SDK
         FoxSDK.init(this, MERCHANT_ID, FoxSDK.Options(logEnable = true, debugEnable = true, env = Enviroment.ALPHA,
-            customBaseUrl = APILoader.BaseUrl("https://www.fox.one", "https://www.fox.one", "https://www.fox.one")))
+            customBaseUrl = null))
 
         //初始化交易模块（带UI）
         ExModule.init(this)
