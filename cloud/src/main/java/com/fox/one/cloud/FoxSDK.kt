@@ -92,7 +92,9 @@ object FoxSDK {
 
     private fun getEncodedDeviceInfo(): String? {
         if (TextUtils.isEmpty(deviceInfo)) {
-            deviceInfo = Base64.encodeToString(DeviceInfo().toString().toByteArray(), Base64.NO_WRAP)
+            val di = DeviceInfo().toString()
+            LogUtils.i("foxone", di)
+            deviceInfo = Base64.encodeToString(di.toByteArray(), Base64.NO_WRAP)
         }
 
         return deviceInfo
