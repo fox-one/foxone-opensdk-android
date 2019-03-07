@@ -97,6 +97,7 @@ object FoxSDK {
             deviceInfo = Base64.encodeToString(di.toByteArray(), Base64.NO_WRAP)
         }
 
+        LogUtils.i("foxone", "device_info:$deviceInfo")
         return deviceInfo
     }
 
