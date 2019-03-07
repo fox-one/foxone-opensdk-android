@@ -7,6 +7,8 @@ import android.os.Message
 import com.fox.one.support.framework.Currency
 import com.fox.one.pay.core.model.CurrencyTicker
 import com.fox.one.support.framework.network.APILoader
+import com.fox.one.support.framework.network.HttpEngine
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +30,12 @@ object CurrencyRateManager {
     private var currencyTickers: List<CurrencyTicker>? = null
 
     fun init(application: Application) {
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpEngine.defaultInterceptor)
+            .build()
+
+        apiLoader.setOkHttp(okHttpClient)
 
         apiLoader.setBaseUri(
             APILoader.BaseUrl(

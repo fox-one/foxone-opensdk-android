@@ -2,9 +2,7 @@ package com.fox.one.support.passport.core
 
 import com.fox.one.passport.core.model.*
 import com.fox.one.support.framework.network.FoxCall
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * class description here
@@ -106,4 +104,19 @@ interface IPassportAPI {
 
     @POST("/api/account/login_tfa")
     fun login(@Body request: TFALoginReqBody): FoxCall<AccountInfo>
+
+    @GET("/api/account/sessions")
+    fun requestLoginSessions(): FoxCall<LoginSessionResponse>
+
+    @DELETE("/api/account/session/{sessionKey}")
+    fun removeLoginSession(@Path("sessionKey") sessionKey: String): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/api_key/create")
+    fun createAPIKey(@Body request: CreateAPIKeyReqBody): FoxCall<CreateAPIKeyResponse>
+
+    @GET("/api/account/api_key/list")
+    fun requestAPIKeys(): FoxCall<List<APIKeyInfo>>
+
+    @DELETE("/api/account/api_key/{key}")
+    fun removeAPIKey(@Path("key") key: String): FoxCall<BasePassportResponse>
 }

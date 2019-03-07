@@ -7,13 +7,14 @@ import android.util.Base64
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.pay.core.rate.CurrencyRateManager
 import com.fox.one.support.common.extension.closeSilently
+import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.*
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.HttpEngine
+import com.google.gson.annotations.SerializedName
 import okhttp3.Interceptor
 import okio.Buffer
-import org.msgpack.core.MessagePack
 import java.io.Serializable
 import java.nio.charset.Charset
 import java.util.*
@@ -50,9 +51,7 @@ object FoxSDK {
             val newRequestBuilder = it.request().newBuilder()
             newRequestBuilder.addHeader(HEADER_MERCHANT_ID, this.merchantId)
             newRequestBuilder.addHeader(HEADER_ACCEPT_LANGUAGE, I18nManager.locale.formatWithMiddleLine())
-
-            //device info
-            newRequestBuilder.addHeader("x-gateway-client", getEncodedDeviceInfo())
+            newRequestBuilder.addHeader(HEADER_DEVICE_INFO, getEncodedDeviceInfo())
 
             //sign when login
             if (PassportAPI.isLogin()) {
@@ -93,17 +92,7 @@ object FoxSDK {
 
     private fun getEncodedDeviceInfo(): String? {
         if (TextUtils.isEmpty(deviceInfo)) {
-            val packer = MessagePack.newDefaultBufferPacker()
-            packer.packMapHeader(5)
-            packer.packString("device_id")
-            packer.packString(FoxRuntime.deviceId)
-            packer.packString("device_name")
-            packer.packString("${Build.BRAND} ${Build.DISPLAY}")
-            packer.packString("device_platform")
-            packer.packString("android")
-
-            deviceInfo = Base64.encodeToString(packer.toByteArray(), Base64.NO_WRAP)
-            packer.closeSilently()
+            deviceInfo = Base64.encodeToString(DeviceInfo().toString().toByteArray(), Base64.NO_WRAP)
         }
 
         return deviceInfo
@@ -111,8 +100,22 @@ object FoxSDK {
 
     private const val HEADER_MERCHANT_ID = "fox-merchant-id"
     private const val HEADER_ACCEPT_LANGUAGE = "Accept-Language"
+    private const val HEADER_USER_AGENT = "User-Agent"
+    private const val HEADER_DEVICE_INFO = "device_info"
 
     data class Options(var logEnable: Boolean, var debugEnable: Boolean, var env: Enviroment, var customBaseUrl: APILoader.BaseUrl?): Serializable {
 
+    }
+
+    data class DeviceInfo(
+        @SerializedName("device_id") val deviceId: String,
+        @SerializedName("device_name") val deviceName: String,
+        @SerializedName("device_platform") val devicePlatform: String
+    ): Serializable {
+        constructor(): this(FoxRuntime.deviceId, "${Build.BRAND} ${Build.DISPLAY}", "android")
+
+        override fun toString(): String {
+            return JsonUtils.optToJson(this)
+        }
     }
 }

@@ -50,11 +50,11 @@ object FoxRuntime {
         env = Enviroment.valueOf(FoxPreference.instance(application).getInt(PREF_KEY_ENV, Enviroment.RELEASE.value))
         debug = FoxPreference.instance(application).getBoolean(PREF_KEY_DEBUG, false)
 
+        val deviceName = "${Build.BRAND}_${Build.DISPLAY}".replace(" ", "_")
         userAgent = StringBuilder(System.getProperty("http.agent"))
-            .append(" appId/${FoxRuntime.application.packageName}")
-            .append(" versionName/$versionName")
-            .append(" versionCode/$versionCode")
-            .append(" deviceId/$deviceId")
+            .append(" DeviceId/$deviceId")
+            .append(" DeviceName/$deviceName")
+            .append(" DevicePlatform/android")
             .toString()
     }
 }

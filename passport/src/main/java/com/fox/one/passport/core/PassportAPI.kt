@@ -21,7 +21,6 @@ import java.net.URL
  * @since 2019-01-21
  */
 object PassportAPI: IPassportAPI, IKYCAPI {
-
     const val ALPHA_URL = "https://dev-gateway.fox.one"
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"
@@ -61,7 +60,7 @@ object PassportAPI: IPassportAPI, IKYCAPI {
 
             val newHttpUrl = httpUrlBuilder?.build()
             val newUrl = newHttpUrl?.url().toString()
-            val host = if (newHttpUrl?.isHttps == true) "https://${newHttpUrl?.host()}"
+            val host = if (newHttpUrl?.isHttps == true) "https://${newHttpUrl.host()}"
             else "http://${newHttpUrl?.host()}"
 
             val urlExcludeHost = newUrl.substring(host.length)
@@ -197,6 +196,31 @@ object PassportAPI: IPassportAPI, IKYCAPI {
     override fun login(request: TFALoginReqBody): FoxCall<AccountInfo> {
         return apiLoader.load(IPassportAPI::class.java)
             .login(request)
+    }
+
+    override fun requestLoginSessions(): FoxCall<LoginSessionResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestLoginSessions()
+    }
+
+    override fun removeLoginSession(sessionKey: String): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .removeLoginSession(sessionKey)
+    }
+
+    override fun createAPIKey(request: CreateAPIKeyReqBody): FoxCall<CreateAPIKeyResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .createAPIKey(request)
+    }
+
+    override fun requestAPIKeys(): FoxCall<List<APIKeyInfo>> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestAPIKeys()
+    }
+
+    override fun removeAPIKey(key: String): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .removeAPIKey(key)
     }
 
     data class SignResult(var newUrl: String, var sign: String): Serializable {
