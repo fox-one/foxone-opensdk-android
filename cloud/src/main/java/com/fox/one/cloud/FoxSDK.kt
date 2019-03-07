@@ -104,7 +104,7 @@ object FoxSDK {
     private const val HEADER_MERCHANT_ID = "fox-merchant-id"
     private const val HEADER_ACCEPT_LANGUAGE = "Accept-Language"
     private const val HEADER_USER_AGENT = "User-Agent"
-    private const val HEADER_DEVICE_INFO = "device_info"
+    private const val HEADER_DEVICE_INFO = "device-info"
 
     data class Options(var logEnable: Boolean, var debugEnable: Boolean, var env: Enviroment, var customBaseUrl: APILoader.BaseUrl?): Serializable {
 
