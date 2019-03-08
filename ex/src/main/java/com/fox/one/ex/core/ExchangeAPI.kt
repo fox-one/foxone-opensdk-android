@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient
  * @since 2019-01-23
  */
 object ExchangeAPI: IExchangeAPI {
+
     override fun getPairs(): FoxCall<List<CoinPairInfo>> {
         return CloudAPI.Impl.getPairs()
     }
@@ -73,6 +74,11 @@ object ExchangeAPI: IExchangeAPI {
     override fun getTradeInfoOfOrder(orderId: String): FoxCall<List<TradeHistoryInfo>> {
         return apiloader.load(IExchangeAPI::class.java)
             .getTradeInfoOfOrder(orderId)
+    }
+
+    override fun getAssetIntro(assetId: String): FoxCall<AssetIntroResponse> {
+        return apiloader.load(IExchangeAPI::class.java)
+            .getAssetIntro(assetId)
     }
 
     private val apiloader = APILoader()

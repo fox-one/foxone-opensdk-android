@@ -23,6 +23,9 @@ interface IExchangeAPI {
     @GET("/exchange/market/assets")
     fun getAssets(): FoxCall<List<AssetInfo>>
 
+    @GET("/p/exchange/market/asset/{assetId}")
+    fun getAssetIntro(@Path("assetId") assetId: String): FoxCall<AssetIntroResponse>
+
     /**
      * 获取币对K线数据
      * @param symbol etc: EOSUSD
@@ -88,8 +91,8 @@ interface IExchangeAPI {
     fun getOrders(@Query("symbol") symbol: String?, @Query("state") state: String?, @Query("cursor") cursor: String? = null, @Query("limit") limit: Int = 20, @Query("order") order: String = "DESC"): FoxCall<TradeOrderResponse>
 
     @GET("/member/exchange/order/{orderId}")
-    fun getOrderInfo(orderId: String): FoxCall<TradeOrderInfo>
+    fun getOrderInfo(@Path("orderId") orderId: String): FoxCall<TradeOrderInfo>
 
     @GET("/member/exchange/order/{orderId}/trades")
-    fun getTradeInfoOfOrder(orderId: String): FoxCall<List<TradeHistoryInfo>>
+    fun getTradeInfoOfOrder(@Path("orderId") orderId: String): FoxCall<List<TradeHistoryInfo>>
 }
