@@ -1,6 +1,7 @@
 package com.fox.one.support.common.utils
 
 import android.graphics.Bitmap
+import android.text.TextUtils
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
@@ -212,5 +213,23 @@ fun String.generateQRCode(size: Int, offsetRatio: Float = 0.1f): Bitmap? {
     val bitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.RGB_565)
     bitmap.setPixels(pixels, 0, newWidth, 0, 0, newWidth, newHeight)
     return bitmap
+}
+
+fun String.maskMiddle(startOffset: Int, endOffset: Int, mask: String): String {
+    if (TextUtils.isEmpty(this)) {
+        return this
+    }
+
+    if (length < startOffset || length < endOffset) {
+        return this
+    }
+
+    if (length < (startOffset + endOffset)) {
+        return "$mask${substring(length - endOffset)}"
+    }
+
+    val start = substring(0, startOffset)
+    val end = substring(length - endOffset)
+    return "$start$mask$end"
 }
 

@@ -21,6 +21,7 @@ import java.net.URL
  * @since 2019-01-21
  */
 object PassportAPI: IPassportAPI, IKYCAPI {
+
     const val ALPHA_URL = "https://dev-gateway.fox.one"
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"
@@ -221,6 +222,11 @@ object PassportAPI: IPassportAPI, IKYCAPI {
     override fun removeAPIKey(key: String): FoxCall<BasePassportResponse> {
         return apiLoader.load(IPassportAPI::class.java)
             .removeAPIKey(key)
+    }
+
+    override fun updateUserProfile(request: UpdateUserProfileReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .updateUserProfile(request)
     }
 
     data class SignResult(var newUrl: String, var sign: String): Serializable {

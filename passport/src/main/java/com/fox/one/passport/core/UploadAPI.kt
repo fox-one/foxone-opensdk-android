@@ -15,7 +15,6 @@ import java.io.File
  * @since 2019-01-22
  */
 object UploadAPI: IUploadAPI {
-
     private val apiLoader = APILoader()
 
     init {
@@ -36,5 +35,10 @@ object UploadAPI: IUploadAPI {
     fun createUploadReqBody(file: File): MultipartBody.Part {
         val reqBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         return MultipartBody.Part.createFormData("file", file.name, reqBody)
+    }
+
+    override fun uploadUniversalImage(file: MultipartBody.Part): FoxCall<UploadResponse> {
+        return apiLoader.load(IUploadAPI::class.java)
+            .uploadUniversalImage(file)
     }
 }

@@ -21,6 +21,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SMSLoginActivity"/>
         <activity android:name=".ExchangeActivity"/>
+        <activity android:name=".FilterActivity"/>
     </application>
 
 </manifest>

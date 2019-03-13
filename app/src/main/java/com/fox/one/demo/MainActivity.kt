@@ -17,6 +17,7 @@ import com.fox.one.pay.core.OtcAPI
 import com.fox.one.support.common.extension.getColorCompat
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.common.utils.maskMiddle
 import com.fox.one.support.framework.APPLifeCycleManager
 import com.fox.one.support.framework.network.ErrorResponse
 import com.fox.one.support.framework.network.HttpErrorHandler
@@ -127,17 +128,7 @@ class MainActivity : AppCompatActivity() {
 //
 //            LogUtils.i("foxone", "tfa_token: ${data.data?.get("tfa_token").toString()}")
 
-            DEVAPI.Impl.requestDevices()
-                .enqueue(object: Callback<Any> {
-                    override fun onFailure(call: Call<Any>, t: Throwable) {
-                        HttpErrorHandler.handle(t)
-                    }
-
-                    override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                        LogUtils.i("foxone", "devices:::${JsonUtils.optToJson(response.body())}")
-                    }
-
-                })
+            FilterActivity.start(this@MainActivity)
         }
 
         LogUtils.i("foxone", "brand:${Build.BRAND}, board:${Build.BOARD}, device:${Build.DEVICE}, model:${Build.MODEL}, " +
@@ -145,6 +136,12 @@ class MainActivity : AppCompatActivity() {
                 "hardware:${Build.HARDWARE}, product:${Build.PRODUCT}, id:${Build.ID}, host:${Build.HOST}")
         LogUtils.i("foxone", " radioVersion:${Build.getRadioVersion()}, " +
                 "                release: ${Build.VERSION.RELEASE}, base_os: ${Build.VERSION.BASE_OS}, sdk_int: ${Build.VERSION.SDK_INT}, codename: ${Build.VERSION.CODENAME}")
+
+        val email = "xiaoming1109@gmail.com"
+        val atIndex = email.indexOf("@")
+        val endPart = email.substring(atIndex)
+        val result = email.maskMiddle(3, endPart.length, "***")
+        LogUtils.i("foxone", "atIndex:$atIndex, endPart:$endPart, endOffset:${email.length - endPart.length}, result: $result")
     }
 
     private var subIdOfAllTicker: String = ""

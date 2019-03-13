@@ -20,4 +20,8 @@ interface IUploadAPI {
     @Multipart
     @POST("/api/file")
     fun uploadFile(@Part file: MultipartBody.Part): FoxCall<UploadResponse>
+
+    @Multipart
+    @POST("/api/file?public=1")
+    fun uploadUniversalImage(@Part file: MultipartBody.Part): FoxCall<UploadResponse>
 }

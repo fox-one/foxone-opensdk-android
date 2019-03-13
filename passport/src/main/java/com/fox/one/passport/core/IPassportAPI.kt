@@ -63,6 +63,9 @@ interface IPassportAPI {
     @GET("/api/account/detail")
     fun getAccountInfo(): FoxCall<AccountInfo>
 
+    @PUT("/api/account/profile")
+    fun updateUserProfile(@Body request: UpdateUserProfileReqBody): FoxCall<BasePassportResponse>
+
     /**
      * 登出
      */

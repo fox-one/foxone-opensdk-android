@@ -171,4 +171,6 @@ object ErrorCode {
      * 两步验证未开启
      */
     const val TFA_DISABLED = 1113
+
+    const val BLOCKED_BY_DEVICE = 1175
 }
