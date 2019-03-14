@@ -122,4 +122,28 @@ interface IPassportAPI {
 
     @DELETE("/api/account/api_key/{key}")
     fun removeAPIKey(@Path("key") key: String): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/user_auth/request")
+    fun requestUserAuthInfo(): FoxCall<UserAuthInfo>
+
+    @POST("/api/account/user_auth/sms/request")
+    fun requestAuthSMSCode(@Body request: AuthReqBody): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/user_auth/email/request")
+    fun requestAuthEmailCode(@Body request: AuthReqBody): FoxCall<BasePassportResponse>
+
+    @POST("/api/account/user_auth/verify")
+    fun verifyAuth(@Body request: VerifyAuthReqBody): FoxCall<BasePassportResponse>
+
+    @GET("/api/account/withdraw/status")
+    fun requestWithdrawStatus(): FoxCall<WithdrawStatusResponse>
+
+    @POST("/api/account/withdraw/request")
+    fun requestWithdraw(@Body request: RequestWithdrawReqBody): FoxCall<RequestWithdrawResponse>
+
+    @POST("/api/account/auth/{requestId}")
+    fun authWithdraw(@Path("requestId") requestId: Long, @Body request: AuthReqBody): FoxCall<RequestWithdrawResponse>
+
+    @GET("/api/account/withdraw/fee")
+    fun requestWithdrawFee(@Body request: WithdrawFeeReqBody): FoxCall<WithdrawFeeResponse>
 }

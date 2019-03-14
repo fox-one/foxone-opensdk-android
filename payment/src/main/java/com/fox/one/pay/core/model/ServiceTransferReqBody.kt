@@ -35,10 +35,4 @@ data class ServiceTransferReqBody(
      */
     @SerializedName("trace_id") var traceId: String): Serializable {
     constructor():this("", "", "", "0", "", "")
-
-    companion object {
-        const val SERVICE_PAYMENT = "payment"
-        const val SERVICE_EXCHANGE = "exchange"
-        const val SERVICE_OTC = "otc"
-    }
 }

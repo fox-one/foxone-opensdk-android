@@ -229,6 +229,46 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .updateUserProfile(request)
     }
 
+    override fun requestUserAuthInfo(): FoxCall<UserAuthInfo> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestUserAuthInfo()
+    }
+
+    override fun requestAuthSMSCode(request: AuthReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestAuthSMSCode(request)
+    }
+
+    override fun requestAuthEmailCode(request: AuthReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestAuthEmailCode(request)
+    }
+
+    override fun verifyAuth(request: VerifyAuthReqBody): FoxCall<BasePassportResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .verifyAuth(request)
+    }
+
+    override fun requestWithdrawStatus(): FoxCall<WithdrawStatusResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestWithdrawStatus()
+    }
+
+    override fun requestWithdraw(request: RequestWithdrawReqBody): FoxCall<RequestWithdrawResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestWithdraw(request)
+    }
+
+    override fun authWithdraw(requestId: Long, request: AuthReqBody): FoxCall<RequestWithdrawResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .authWithdraw(requestId, request)
+    }
+
+    override fun requestWithdrawFee(request: WithdrawFeeReqBody): FoxCall<WithdrawFeeResponse> {
+        return apiLoader.load(IPassportAPI::class.java)
+            .requestWithdrawFee(request)
+    }
+
     data class SignResult(var newUrl: String, var sign: String): Serializable {
 
     }
