@@ -18,11 +18,11 @@ data class LoginSession(
 ) : Serializable {
 
     data class DeviceInfo(
-        @SerializedName("id") val id: Long,
-        @SerializedName("name") val name: String?,
-        @SerializedName("platform") val platform: String?,
-        @SerializedName("ip") val ip: String?,
-        @SerializedName("ua") val ua: String?
+        @SerializedName("id") val id: String = "",
+        @SerializedName("name") val name: String = "",
+        @SerializedName("platform") val platform: String = "",
+        @SerializedName("ip") val ip: String = "",
+        @SerializedName("ua") val ua: String = ""
     ) : Serializable {
 
     }

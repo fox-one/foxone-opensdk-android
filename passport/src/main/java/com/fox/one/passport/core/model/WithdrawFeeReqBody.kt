@@ -15,6 +15,6 @@ data class WithdrawFeeReqBody(@SerializedName("asset_id") val assetId: String,
                                */
                               @SerializedName("service") val service: String,
                               @SerializedName("public_key") val publicKey: String,
-                              @SerializedName("account_name") val accountNAme: String,
+                              @SerializedName("account_name") val accountName: String,
                               @SerializedName("account_tag") val accountTag: String): Serializable {
 }

@@ -77,6 +77,14 @@ object ErrorCode {
      * 图形验证码失效
      */
     const val VALIDATION_INVALID_CAPTCHA = 10203
+    /**
+     * 手机验证码错误
+     */
+    const val AUTH_ERROR_SMS_CODE = 10204
+    /**
+     * 邮箱验证码错误
+     */
+    const val AUTH_ERROR_EMAIL_CODE = 10205
 
     //kyc
     /**
@@ -173,4 +181,20 @@ object ErrorCode {
     const val TFA_DISABLED = 1113
 
     const val BLOCKED_BY_DEVICE = 1175
+    /**
+     * 提现额度不够
+     */
+    const val WITHDRAW_OVER_CREDIT = 10401
+    /**
+     * 提现被禁止
+     */
+    const val WITHDRAW_FORBID = 10402
+    /**
+     * 提现申请已经验证通过了，不可再次申请
+     */
+    const val WITHDRAW_HAS_BEEN_APPROVED = 10403
+    /**
+     * 提现申请已过期
+     */
+    const val WITHDRAW_EXPIRED = 10404
 }

@@ -43,6 +43,7 @@ interface IPayAPI {
     /**
      * 提现接口(转出)
      */
+    @Deprecated("")
     @POST("/member/payment/withdraw")
     fun withdraw(@Body request: WithdrawReqBody): FoxCall<SnapshotResponse>
 

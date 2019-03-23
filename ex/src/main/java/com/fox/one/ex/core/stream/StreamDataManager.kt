@@ -33,8 +33,8 @@ object StreamDataManager {
     private const val TAG = "StreamDataManager"
 
     private const val ALPHA_URL = "https://dev-gateway.fox.one"
-    private const val BETA_URL = "https://gateway.fox.one"
-    private const val RELEASE_URL = "https://gateway.fox.one"
+    private const val BETA_URL = "https://openapi.fox.one"
+    private const val RELEASE_URL = "https://openapi.fox.one"
 
     private const val PATH_WS = "/ws"
 

@@ -19,7 +19,9 @@ import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.common.utils.maskMiddle
 import com.fox.one.support.framework.APPLifeCycleManager
+import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.ErrorResponse
+import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.support.framework.network.HttpErrorHandler
 import com.foxone.exchange.account.kyc.KYCActivity
 import com.foxone.exchange.ex.ExModule
@@ -30,6 +32,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import retrofit2.http.POST
+import retrofit2.http.Query
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -116,32 +120,30 @@ class MainActivity : AppCompatActivity() {
 //            } else {
 //                AccountManager.launchLoginUI(this@MainActivity)
 //            }
-//            val str = "{\n" +
-//                    "  \"code\": 1110,\n" +
-//                    "  \"msg\": \"2-Step verification required\",\n" +
-//                    "  \"data\": {\n" +
-//                    "    \"tfa_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHAiOiIyZmEgbG9naW4iLCJleHAiOjE1NTExNjc4NzB9.4up5L4315b7UVCrJddBg_6TbYIBS5KGHy0AHYG6_ZiU\"\n" +
-//                    "  }\n" +
-//                    "}"
-//
-//            val data = JsonUtils.optFromJson(str, ErrorResponse::class.java)
-//
-//            LogUtils.i("foxone", "tfa_token: ${data.data?.get("tfa_token").toString()}")
+            val apiLoader = APILoader()
 
-            FilterActivity.start(this@MainActivity)
+            val secret = "6Lfe0pgUAAAAALdVZMJkeCUXhcGvXQY0gCQ55Ysq"
+            val response = "03AOLTBLRqoqhHDZcFAJBqqSLWsvaFxlzIGqbKPu9w-bZhFjAB-0tYMYAUex2PMn-K4vmj2Z4DFErMCzY2BQmFLIvYhkkn4V4ZYL5uXL9-B6VGNtsXuv80821DTGT-D3aXplGkpTFlGjMbFNRZWisok6htSwAYKQZpuFY0qrmULjOwO5dbJ8XhCWW0g6ronLGpIgu5XtE-r0s-oAOwx05FtZ2kKfISJuouq-sjJXs6lt3DtHUBhrvJzn2gtpcy61L5U_wZBDUmPOOTPSt8JA8bLqz4PIDZKBs7QCR4Z0k7Bm62pu5awe-oNIuntVF174S92hfIXQO3fNz0rI1tSfJLzQx2FS8hGU1qPw"
+
+            apiLoader.setBaseUri(APILoader.BaseUrl("https://www.google.com", "https://www.google.com", "https://www.google.com"))
+            apiLoader.load(SiteVerifyAPI::class.java)
+                .verify(secret, response)
+                .enqueue(object: Callback<Any> {
+                    override fun onFailure(call: Call<Any>, t: Throwable) {
+                        LogUtils.i("foxone", "exception:${t.toString()}")
+                    }
+
+                    override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                        LogUtils.i("foxone", "${JsonUtils.optToJson(response.body())}")
+                    }
+                })
         }
 
-        LogUtils.i("foxone", "brand:${Build.BRAND}, board:${Build.BOARD}, device:${Build.DEVICE}, model:${Build.MODEL}, " +
-                "display:${Build.DISPLAY}, bootloader:${Build.BOOTLOADER}, fingerprint:${Build.FINGERPRINT}, " +
-                "hardware:${Build.HARDWARE}, product:${Build.PRODUCT}, id:${Build.ID}, host:${Build.HOST}")
-        LogUtils.i("foxone", " radioVersion:${Build.getRadioVersion()}, " +
-                "                release: ${Build.VERSION.RELEASE}, base_os: ${Build.VERSION.BASE_OS}, sdk_int: ${Build.VERSION.SDK_INT}, codename: ${Build.VERSION.CODENAME}")
+        LogUtils.i("foxone", "day: ${System.currentTimeMillis() + (1000 * 60 * 60 * 24)}")
 
-        val email = "xiaoming1109@gmail.com"
-        val atIndex = email.indexOf("@")
-        val endPart = email.substring(atIndex)
-        val result = email.maskMiddle(3, endPart.length, "***")
-        LogUtils.i("foxone", "atIndex:$atIndex, endPart:$endPart, endOffset:${email.length - endPart.length}, result: $result")
+        findViewById<Button>(R.id.webView).setOnClickListener {
+            WebViewActivity.start(this@MainActivity)
+        }
     }
 
     private var subIdOfAllTicker: String = ""
@@ -159,5 +161,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         StreamDataManager.unsubscribe(AllTickerStreamReqBody(subIdOfAllTicker, StreamAction.UNSUB.key))
+    }
+
+    interface SiteVerifyAPI {
+
+        @POST("/recaptcha/api/siteverify")
+        fun verify(@Query("secret") secret: String, @Query("response") response: String): FoxCall<Any>
     }
 }

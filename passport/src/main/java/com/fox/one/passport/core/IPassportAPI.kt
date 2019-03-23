@@ -133,7 +133,7 @@ interface IPassportAPI {
     fun requestAuthEmailCode(@Body request: AuthReqBody): FoxCall<BasePassportResponse>
 
     @POST("/api/account/user_auth/verify")
-    fun verifyAuth(@Body request: VerifyAuthReqBody): FoxCall<BasePassportResponse>
+    fun verifyAuth(@Body request: VerifyAuthReqBody): FoxCall<VerifyAuthResponse>
 
     @GET("/api/account/withdraw/status")
     fun requestWithdrawStatus(): FoxCall<WithdrawStatusResponse>
@@ -141,9 +141,13 @@ interface IPassportAPI {
     @POST("/api/account/withdraw/request")
     fun requestWithdraw(@Body request: RequestWithdrawReqBody): FoxCall<RequestWithdrawResponse>
 
-    @POST("/api/account/auth/{requestId}")
+    @POST("/api/account/withdraw/auth/{requestId}")
     fun authWithdraw(@Path("requestId") requestId: Long, @Body request: AuthReqBody): FoxCall<RequestWithdrawResponse>
 
     @GET("/api/account/withdraw/fee")
-    fun requestWithdrawFee(@Body request: WithdrawFeeReqBody): FoxCall<WithdrawFeeResponse>
+    fun requestWithdrawFee(@Query("asset_id") assetId: String,
+                           @Query("service") service: String,
+                           @Query("public_key") publicKey: String,
+                           @Query("account_name") accountName: String,
+                           @Query("account_tag") accountTag: String): FoxCall<WithdrawFeeResponse>
 }

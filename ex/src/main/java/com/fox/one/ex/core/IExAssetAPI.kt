@@ -41,6 +41,7 @@ interface IExAssetAPI {
     /**
      * 提现接口(转出)
      */
+    @Deprecated("")
     @POST("/member/exchange/withdraw")
     fun withdraw(@Body request: WithdrawReqBody): FoxCall<SnapshotResponse>
 

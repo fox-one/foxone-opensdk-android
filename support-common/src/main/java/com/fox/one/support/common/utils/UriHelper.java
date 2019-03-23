@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,7 +94,12 @@ public class UriHelper {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                return getFilePath(context, uri);
+                String path = getFilePath(context, uri);
+                if (TextUtils.isEmpty(path)) {
+                    return getDataColumn(context, uri, null, null);
+                } else {
+                    return path;
+                }
             } else {
                 return getDataColumn(context, uri, null, null);
             }

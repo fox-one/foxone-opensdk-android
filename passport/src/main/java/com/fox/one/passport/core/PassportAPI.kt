@@ -244,7 +244,7 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .requestAuthEmailCode(request)
     }
 
-    override fun verifyAuth(request: VerifyAuthReqBody): FoxCall<BasePassportResponse> {
+    override fun verifyAuth(request: VerifyAuthReqBody): FoxCall<VerifyAuthResponse> {
         return apiLoader.load(IPassportAPI::class.java)
             .verifyAuth(request)
     }
@@ -264,9 +264,15 @@ object PassportAPI: IPassportAPI, IKYCAPI {
             .authWithdraw(requestId, request)
     }
 
-    override fun requestWithdrawFee(request: WithdrawFeeReqBody): FoxCall<WithdrawFeeResponse> {
+    override fun requestWithdrawFee(
+        assetId: String,
+        service: String,
+        publicKey: String,
+        accountName: String,
+        accountTag: String
+    ): FoxCall<WithdrawFeeResponse> {
         return apiLoader.load(IPassportAPI::class.java)
-            .requestWithdrawFee(request)
+            .requestWithdrawFee(assetId, service, publicKey, accountName, accountTag)
     }
 
     data class SignResult(var newUrl: String, var sign: String): Serializable {
