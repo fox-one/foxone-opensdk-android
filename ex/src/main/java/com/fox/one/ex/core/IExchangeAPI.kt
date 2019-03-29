@@ -3,6 +3,7 @@ package com.fox.one.ex.core
 import com.fox.one.ex.core.model.*
 import com.fox.one.pay.core.model.AssetInfo
 import com.fox.one.support.framework.network.FoxCall
+import com.google.gson.JsonElement
 import retrofit2.http.*
 
 /**

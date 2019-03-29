@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script>
+function test(method) {
+	if (window.WebViewJavascriptBridge) {
+		window.WebViewJavascriptBridge.hello(function (cont){
+		console.log("say" + cont + "!!!!!!");
+		//alert("say" + cont + "!!!!!")
+		})
+	} else {
+        alert("js bridge 未注入")
+	}
+}
+    </script>
+    <title>Text</title>
+</head>
+
+<body>
+
+<button type="button" id="test_button" name="test"  onclick="test('hello')">Test</button>
+</body>
+</html>

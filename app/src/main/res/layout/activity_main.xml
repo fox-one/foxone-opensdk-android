@@ -54,4 +54,14 @@
             android:layout_width="match_parent"
             style="@style/Theme.PrimaryButton"
             android:text="KYC"/>
+    <android.support.design.button.MaterialButton
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+        style="@style/Theme.PrimaryButton"
+        android:text="WebView"/>
+    <android.support.design.button.MaterialButton
+            android:id="@+id/filter_data"
+            android:layout_width="match_parent"
+        style="@style/Theme.PrimaryButton"
+        android:text="Filter"/>
 </LinearLayout>

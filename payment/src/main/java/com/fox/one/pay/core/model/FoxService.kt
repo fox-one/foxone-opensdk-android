@@ -9,5 +9,5 @@ package com.fox.one.pay.core.model
 object FoxService {
     const val PAYMENT = "payment"
     const val EXCHANGE = "exchange"
-    const val OTC = "OTC"
+    const val OTC = "otc"
 }

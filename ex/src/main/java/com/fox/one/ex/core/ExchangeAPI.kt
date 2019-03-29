@@ -7,6 +7,7 @@ import com.fox.one.support.framework.Order
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
 import com.fox.one.support.framework.network.HttpEngine
+import com.google.gson.JsonElement
 import okhttp3.OkHttpClient
 
 /**

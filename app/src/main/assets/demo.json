@@ -1,0 +1,16 @@
+{
+  "banners":[
+    {
+      "title": "title",
+      "description": "description",
+      "image": "image",
+      "url": "https://www.fox.one"
+    },
+    {
+      "title": "title",
+      "description": "description",
+      "image": "image",
+      "url": "https://www.fox.one"
+    }
+  ]
+}
