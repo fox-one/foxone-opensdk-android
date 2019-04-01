@@ -2,7 +2,9 @@ package com.fox.one.support.common.extension
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
@@ -121,5 +123,19 @@ fun Context.vibrate(milliseconds: Long) {
                 vibrator.vibrate(milliseconds)
             }
         }
+    }
+}
+
+fun Context.sendEmail(subject: String, text: String, chooserTitle: String, email: Array<String>) {
+    try {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "message/rfc822"
+        intent.putExtra(Intent.EXTRA_EMAIL, email)
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+
+        startActivity(Intent.createChooser(intent, chooserTitle))
+    } catch (e: ActivityNotFoundException) {
+        e.printStackTrace()
     }
 }
