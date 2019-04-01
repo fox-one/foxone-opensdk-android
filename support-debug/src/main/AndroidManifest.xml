@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.fox.one.support.debug">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+        <activity
+                android:name=".crash.DefaultErrorActivity"
+                android:process=":error_activity" />
+
+        <provider
+                android:name=".crash.F1InitProvider"
+                android:authorities="${applicationId}.customactivityoncrashinitprovider"
+                android:exported="false"
+                android:initOrder="101" />
+    </application>
+
+</manifest>

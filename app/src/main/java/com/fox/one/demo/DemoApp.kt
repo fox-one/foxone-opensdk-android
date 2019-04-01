@@ -8,6 +8,7 @@ import com.fox.one.cloud.FoxSDK
 import com.fox.one.passport.core.model.KYCStatus
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.common.utils.ToastUtil
+import com.fox.one.support.debug.crash.F1CrashConfig
 import com.fox.one.support.framework.APPLifeCycleManager
 import com.fox.one.support.framework.AppLifecycleCallback
 import com.fox.one.support.framework.Enviroment
@@ -60,6 +61,20 @@ class DemoApp: Application() {
         ExModule.setOnLaunchLoginUIListener {
             LoginActivity.start(it)
         }
+
+        initCrashReport()
+
+    }
+
+    private fun initCrashReport() {
+        F1CrashConfig.Builder.create()
+            .enabled(true)
+            .showErrorDetails(true)
+            .showRestartButton(true)
+            .trackActivities(true)
+            .restartActivity(MainActivity::class.java)
+            .minTimeBetweenCrashesMs(2000)
+            .apply()
     }
 
     override fun attachBaseContext(base: Context?) {
