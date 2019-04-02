@@ -116,18 +116,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.filter_data).setOnClickListener {
-//            FilterActivity.start(this@MainActivity)
-
-            OperationAPI.getConfig().enqueue(object: Callback<Any> {
-                override fun onFailure(call: Call<Any>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                    LogUtils.i("foxone", "${JsonUtils.optToJson(response.body())}")
-                }
-
-            })
+            FilterActivity.start(this@MainActivity)
         }
 
         findViewById<Button>(R.id.btn_make_a_crash).setOnClickListener {
