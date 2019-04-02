@@ -3,6 +3,7 @@ package com.fox.one.demo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import com.fox.one.cloud.operation.OperationAPI
 import com.fox.one.ex.core.stream.AllTickerStreamObserver
 import com.fox.one.ex.core.stream.StreamDataManager
 import com.fox.one.ex.core.stream.model.AllTickerStreamInfo
@@ -115,7 +116,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.filter_data).setOnClickListener {
-            FilterActivity.start(this@MainActivity)
+//            FilterActivity.start(this@MainActivity)
+
+            OperationAPI.getConfig().enqueue(object: Callback<Any> {
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+
+                }
+
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    LogUtils.i("foxone", "${JsonUtils.optToJson(response.body())}")
+                }
+
+            })
         }
 
         findViewById<Button>(R.id.btn_make_a_crash).setOnClickListener {
