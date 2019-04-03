@@ -2,6 +2,7 @@ package com.fox.one.cloud.operation
 
 import com.fox.one.cloud.operation.model.HomeInfo
 import com.fox.one.cloud.operation.model.MerchantConfigResponse
+import com.fox.one.cloud.operation.model.ProtocolInfo
 import com.fox.one.pay.core.PayAPI
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.FoxCall
@@ -16,6 +17,11 @@ import okhttp3.OkHttpClient
  * @since 2019-03-28
  */
 object OperationAPI: IOperationAPI {
+    override fun getProtocols(language: String): FoxCall<ProtocolInfo> {
+        return apiLoader.load(IOperationAPI::class.java)
+            .getProtocols(language)
+    }
+
     override fun getConfig(): FoxCall<MerchantConfigResponse> {
         return apiLoader.load(IOperationAPI::class.java)
             .getConfig()

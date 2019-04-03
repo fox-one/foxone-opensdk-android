@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.fox.one.cloud.operation.OperationAPI
+import com.fox.one.cloud.operation.model.HomeInfo
 import com.fox.one.ex.core.stream.AllTickerStreamObserver
 import com.fox.one.ex.core.stream.StreamDataManager
 import com.fox.one.ex.core.stream.model.AllTickerStreamInfo
@@ -12,6 +13,8 @@ import com.fox.one.ex.core.stream.model.StreamAction
 import com.fox.one.passport.core.PassportAPI
 import com.fox.one.passport.core.model.AccountInfo
 import com.fox.one.passport.core.model.BasePassportResponse
+import com.fox.one.support.common.concurrent.Task
+import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.framework.network.HttpErrorHandler
@@ -24,6 +27,7 @@ import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
 import java.util.*
+import kotlin.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -124,9 +128,6 @@ class MainActivity : AppCompatActivity() {
             string = null
             string!!.length
         }
-
-        LogUtils.i("foxone", "day: ${System.currentTimeMillis() + (1000 * 60 * 60 * 24)}")
-
     }
 
     private var subIdOfAllTicker: String = ""
