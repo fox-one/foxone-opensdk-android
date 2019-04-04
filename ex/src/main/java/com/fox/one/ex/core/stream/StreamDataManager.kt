@@ -38,6 +38,9 @@ object StreamDataManager {
 
     private const val PATH_WS = "/ws"
 
+    private const val ALIGNMENT_DELAY = 25000
+
+    private var alignmentTime: Long = 0
     private val handler = StreamHandler()
 
     private val observers: MutableMap<String, StreamObserver<*, *>> = ConcurrentHashMap()
@@ -48,6 +51,7 @@ object StreamDataManager {
     @Volatile
     private var state: WebSocketEngine.State = WebSocketEngine.State.IDLE
 
+    private val alignmentCache:HashMap<String?, StreamResponse> = HashMap()
     private val reqCache: MutableList<String> = CopyOnWriteArrayList<String>()
     private val okHttpClient by lazy {
         return@lazy OkHttpClient.Builder()
@@ -112,72 +116,79 @@ object StreamDataManager {
     fun dispatchMessage(message: String) {
         val streamResponse = JsonUtils.optFromJson(message, StreamResponse::class.java)
         streamResponse?.let {
-            handler.post {
-                when(it.event) {
-                    StreamEvent.ORDER_OPEN -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                (entry.value as StreamObserver<OrderStreamReqBody, OrderStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, OrderStreamInfo::class.java))
+            alignmentCache[it.event] = it
+            if (System.currentTimeMillis() - alignmentTime > ALIGNMENT_DELAY) {
+                handler.post {
+                    alignmentCache.forEach { cacheItem ->
+                        when(cacheItem.key) {
+                            StreamEvent.ORDER_OPEN -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.USER_DATA) {
+                                        (entry.value as StreamObserver<OrderStreamReqBody, OrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.ORDER_CANCEL -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, OrderStreamInfo::class.java))
+                            StreamEvent.ORDER_CANCEL -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.USER_DATA) {
+                                        (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.ORDER_MATCH -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, OrderMatchedStreamInfo::class.java))
+                            StreamEvent.ORDER_MATCH -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.USER_DATA) {
+                                        (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderMatchedStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.KLINE -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.KLINE) {
-                                (entry.value as StreamObserver<KLineStreamReqBody, KLineStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, KLineStreamInfo::class.java))
+                            StreamEvent.KLINE -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.KLINE) {
+                                        (entry.value as StreamObserver<KLineStreamReqBody, KLineStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, KLineStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.TICKER_24HR -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.TICKER_24HR) {
-                                (entry.value as StreamObserver<TickerStreamReqBody, TickerStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, TickerStreamInfo::class.java))
+                            StreamEvent.TICKER_24HR -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.TICKER_24HR) {
+                                        (entry.value as StreamObserver<TickerStreamReqBody, TickerStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, TickerStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.ALL_TICKER_24HR -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.ALL_TICKER_24HR) {
-                                (entry.value as StreamObserver<AllTickerStreamReqBody, AllTickerStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, AllTickerStreamInfo::class.java))
+                            StreamEvent.ALL_TICKER_24HR -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.ALL_TICKER_24HR) {
+                                        (entry.value as StreamObserver<AllTickerStreamReqBody, AllTickerStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, AllTickerStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.DEPTH_UPDATE -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.DEPTH_UPDATE) {
-                                (entry.value as StreamObserver<DepthStreamReqBody, DepthStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, DepthStreamInfo::class.java))
+                            StreamEvent.DEPTH_UPDATE -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.DEPTH_UPDATE) {
+                                        (entry.value as StreamObserver<DepthStreamReqBody, DepthStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, DepthStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.DEPTH_WITH_LEVEL -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.DEPTH_WITH_LEVEL) {
-                                (entry.value as StreamObserver<DepthLevelStreamReqBody, DepthLevelStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, DepthLevelStreamInfo::class.java))
+                            StreamEvent.DEPTH_WITH_LEVEL -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.DEPTH_WITH_LEVEL) {
+                                        (entry.value as StreamObserver<DepthLevelStreamReqBody, DepthLevelStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, DepthLevelStreamInfo::class.java))
+                                    }
+                                }
                             }
-                        }
-                    }
-                    StreamEvent.TRADE -> {
-                        observers.forEach {entry ->
-                            if (entry.value.getEvent() == StreamEvent.TRADE) {
-                                (entry.value as StreamObserver<TradeStreamReqBody, TradeStreamInfo>).onUpdate(JsonUtils.optFrom(it.data, TradeStreamInfo::class.java))
+                            StreamEvent.TRADE -> {
+                                observers.forEach {entry ->
+                                    if (entry.value.getEvent() == StreamEvent.TRADE) {
+                                        (entry.value as StreamObserver<TradeStreamReqBody, TradeStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, TradeStreamInfo::class.java))
+                                    }
+                                }
                             }
                         }
                     }
                 }
+
+                alignmentTime = System.currentTimeMillis()
             }
         }
     }
