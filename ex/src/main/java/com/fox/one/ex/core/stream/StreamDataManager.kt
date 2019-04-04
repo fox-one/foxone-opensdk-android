@@ -38,7 +38,7 @@ object StreamDataManager {
 
     private const val PATH_WS = "/ws"
 
-    private const val ALIGNMENT_DELAY = 25000
+    private const val ALIGNMENT_DELAY = 3000
 
     private var alignmentTime: Long = 0
     private val handler = StreamHandler()
