@@ -14,7 +14,8 @@ data class WithdrawStatus(@SerializedName("is_blocked") val isBlocked: Boolean,
                           @SerializedName("block_cause") val blockCause: String?,
                           @SerializedName("kyc_status") val kycStatus: Int,
                           @SerializedName("is_tfa_enabled") val isTFAEnabled: Boolean,
-                          @SerializedName("remain_amount_cny") val remainAmountCNY: Double,
-                          @SerializedName("max_amount_cny") val maxAmountCNY: Double): Serializable {
-    constructor(): this(false, 0, "", KYCStatus.APPROVED, false, 0.0, 0.0)
+                          @SerializedName("remain_amount_btc") val remainAmountBTC: Double,
+                          @SerializedName("max_amount_btc") val maxAmountBTC: Double,
+                          @SerializedName("max_single_amount_btc") val maxSingleAmountBTC: Double): Serializable {
+    constructor(): this(false, 0, "", KYCStatus.APPROVED, false, 0.0, 0.0, 0.0)
 }
