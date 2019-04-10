@@ -7,8 +7,6 @@ import com.fox.one.ex.core.stream.model.*
 import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
-import com.fox.one.support.framework.Enviroment
-import com.fox.one.support.framework.FoxRuntime
 import com.fox.one.support.framework.network.APILoader
 import com.fox.one.support.framework.network.HttpEngine
 import com.fox.one.support.framework.network.WebSocketEngine
@@ -124,63 +122,90 @@ object StreamDataManager {
                             StreamEvent.ORDER_OPEN -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                        (entry.value as StreamObserver<OrderStreamReqBody, OrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, OrderOpenStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.ORDER_CANCEL -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                        (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, OrderCancelStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.ORDER_MATCH -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.USER_DATA) {
-                                        (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, OrderMatchedStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, OrderMatchStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<OrderStreamReqBody, BaseOrderStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.KLINE -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.KLINE) {
-                                        (entry.value as StreamObserver<KLineStreamReqBody, KLineStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, KLineStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, KLineStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<KLineStreamReqBody, KLineStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.TICKER_24HR -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.TICKER_24HR) {
-                                        (entry.value as StreamObserver<TickerStreamReqBody, TickerStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, TickerStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, TickerStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<TickerStreamReqBody, TickerStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.ALL_TICKER_24HR -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.ALL_TICKER_24HR) {
-                                        (entry.value as StreamObserver<AllTickerStreamReqBody, AllTickerStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, AllTickerStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, AllTickerStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<AllTickerStreamReqBody, AllTickerStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.DEPTH_UPDATE -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.DEPTH_UPDATE) {
-                                        (entry.value as StreamObserver<DepthStreamReqBody, DepthStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, DepthStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, DepthStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<DepthStreamReqBody, DepthStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.DEPTH_WITH_LEVEL -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.DEPTH_WITH_LEVEL) {
-                                        (entry.value as StreamObserver<DepthLevelStreamReqBody, DepthLevelStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, DepthLevelStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, DepthLevelStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<DepthLevelStreamReqBody, DepthLevelStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }
                             StreamEvent.TRADE -> {
                                 observers.forEach {entry ->
                                     if (entry.value.getEvent() == StreamEvent.TRADE) {
-                                        (entry.value as StreamObserver<TradeStreamReqBody, TradeStreamInfo>).onUpdate(JsonUtils.optFrom(cacheItem.value.data, TradeStreamInfo::class.java))
+                                        val data = JsonUtils.optFrom(cacheItem.value.data, TradeStreamInfo::class.java)
+                                        data?.let {
+                                            (entry.value as StreamObserver<TradeStreamReqBody, TradeStreamInfo>).onUpdate(data)
+                                        }
                                     }
                                 }
                             }

@@ -17,23 +17,22 @@ import okhttp3.OkHttpClient
  */
 object StreamDataAPI: IStreamDataAPI {
     override fun getListenKey(): FoxCall<ListenKeyResponse> {
-        return apiloader.load(IStreamDataAPI::class.java)
+        return apiLoader.load(IStreamDataAPI::class.java)
             .getListenKey()
     }
 
     override fun resetListenKey(request: ResetListenKeyReqBody): FoxCall<ExBaseResponse> {
-        return apiloader.load(IStreamDataAPI::class.java)
+        return apiLoader.load(IStreamDataAPI::class.java)
             .resetListenKey(request)
     }
 
     override fun deleteListenKey(key: String): FoxCall<ExBaseResponse> {
-        return apiloader.load(IStreamDataAPI::class.java)
+        return apiLoader.load(IStreamDataAPI::class.java)
             .deleteListenKey(key)
     }
 
-    private val apiloader = APILoader()
 
-    var apiLoader = APILoader()
+    private var apiLoader = APILoader()
 
     init {
         val okHttpClient = OkHttpClient.Builder()
