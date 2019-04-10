@@ -82,7 +82,7 @@ public class JsonUtils {
     public static <T> T optFromJson(String json, Type typeOfT) {
         try {
             return getGson().fromJson(json, typeOfT);
-        } catch (JsonSyntaxException var3) {
+        } catch (Exception var3) {
             var3.printStackTrace();
             return null;
         }
