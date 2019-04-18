@@ -3,6 +3,7 @@ package com.fox.one.support.framework
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.fox.one.support.common.utils.LogUtils
 
 /**
  * class description here
@@ -17,7 +18,6 @@ object APPLifeCycleManager {
     private var mInForeGround = false
     private var mActivityList = mutableListOf<Activity>()
     private var mAppLifecycleCallback = mutableListOf<AppLifecycleCallback>()
-    private var mainActivity: String? = ""
 
     fun init(application: Application) {
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
@@ -138,18 +138,5 @@ object APPLifeCycleManager {
                 ref.finish()
             }
         }
-    }
-
-    fun setMainActivity(className: String) {
-        mainActivity = className
-    }
-
-    fun isMainActivityExist(): Boolean {
-        mActivityList.forEach {
-            if (it.javaClass.name == mainActivity) {
-                return true
-            }
-        }
-        return false
     }
 }
