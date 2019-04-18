@@ -17,6 +17,7 @@ import com.fox.one.support.common.concurrent.Task
 import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.framework.network.HttpEngine
 import com.fox.one.support.framework.network.HttpErrorHandler
 import com.foxone.exchange.ex.ExModule
 import com.foxone.exchange.ex.wallet.WalletActivity

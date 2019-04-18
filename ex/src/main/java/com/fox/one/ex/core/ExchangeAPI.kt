@@ -82,18 +82,12 @@ object ExchangeAPI: IExchangeAPI {
             .getAssetIntro(assetId)
     }
 
-    private val apiloader = APILoader()
-
     const val ALPHA_URL = "https://dev-gateway.fox.one"
+
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"
 
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiloader.setOkHttp(okHttpClient)
-        apiloader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
+    private val apiloader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
     }
 }

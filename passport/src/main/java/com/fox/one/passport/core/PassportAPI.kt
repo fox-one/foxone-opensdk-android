@@ -27,15 +27,8 @@ object PassportAPI: IPassportAPI, IKYCAPI {
     const val RELEASE_URL = "https://openapi.fox.one"
 
     var accountInfo: AccountInfo = AccountInfo()
-    var apiLoader = APILoader()
-
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
+    var apiLoader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
     }
 
     fun isLogin(): Boolean {

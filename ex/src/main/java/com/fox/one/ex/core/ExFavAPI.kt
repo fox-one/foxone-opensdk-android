@@ -18,15 +18,8 @@ object ExFavAPI: IExFavAPI {
     const val BETA_URL = "https://openapi.fox.one"
     const val RELEASE_URL = "https://openapi.fox.one"
 
-    var apiLoader = APILoader()
-
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
+    var apiLoader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
     }
 
     override fun getFavPairs(): FoxCall<MutableList<String>> {

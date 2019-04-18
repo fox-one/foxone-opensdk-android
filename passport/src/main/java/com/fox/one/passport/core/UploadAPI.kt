@@ -15,10 +15,8 @@ import java.io.File
  * @since 2019-01-22
  */
 object UploadAPI: IUploadAPI {
-    private val apiLoader = APILoader()
-
-    init {
-        apiLoader.setBaseUri(APILoader.BaseUrl(PassportAPI.ALPHA_URL, PassportAPI.BETA_URL, PassportAPI.RELEASE_URL))
+    private val apiLoader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(PassportAPI.ALPHA_URL, PassportAPI.BETA_URL, PassportAPI.RELEASE_URL))
     }
 
     /**

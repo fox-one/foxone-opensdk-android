@@ -22,7 +22,7 @@ import java.util.concurrent.Executor
 class APILoader {
 
     private var baseUrl: BaseUrl = BaseUrl("", "", "")
-    private var httpEngine = HttpEngine()
+    private var httpEngine = HttpEngine.getDefaultEngine()
     /**
      * use default base url with HttpEngine.getBaseUrl(); use default HttpEngine
      */

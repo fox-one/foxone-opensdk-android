@@ -116,5 +116,15 @@ class HttpEngine {
         var defaultInterceptor: Interceptor = Interceptor {
             return@Interceptor it.proceed(it.request())
         }
+
+        private var defaultEngine :HttpEngine = HttpEngine()
+
+        fun getDefaultEngine(): HttpEngine {
+            if (defaultEngine.okHttpClient.interceptors().isEmpty()) {
+                defaultEngine.okHttpClient = defaultEngine.okHttpClient.newBuilder().addInterceptor(defaultInterceptor).build()
+            }
+
+            return defaultEngine
+        }
     }
 }

@@ -37,14 +37,7 @@ object OperationAPI: IOperationAPI {
             .getBucket(key)
     }
 
-    private val apiLoader = APILoader()
-
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.BaseUrl(PayAPI.ALPHA_URL, PayAPI.BETA_URL, PayAPI.RELEASE_URL))
+    private val apiLoader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(PayAPI.ALPHA_URL, PayAPI.BETA_URL, PayAPI.RELEASE_URL))
     }
 }

@@ -66,14 +66,7 @@ object ExAssetAPI: IExAssetAPI {
             .transfer(request)
     }
 
-    var apiLoader = APILoader()
-
-    init {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiLoader.setOkHttp(okHttpClient)
-        apiLoader.setBaseUri(APILoader.BaseUrl(ExchangeAPI.ALPHA_URL, ExchangeAPI.BETA_URL, ExchangeAPI.RELEASE_URL))
+    var apiLoader = APILoader().apply {
+        this.setBaseUri(APILoader.BaseUrl(ExchangeAPI.ALPHA_URL, ExchangeAPI.BETA_URL, ExchangeAPI.RELEASE_URL))
     }
 }
