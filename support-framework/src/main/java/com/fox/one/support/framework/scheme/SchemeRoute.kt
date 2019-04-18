@@ -1,4 +1,4 @@
-package com.foxone.exchange.framework.scheme
+package com.fox.one.support.framework.scheme
 
 import android.content.Context
 import android.content.Intent
