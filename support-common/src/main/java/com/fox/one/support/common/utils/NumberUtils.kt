@@ -8,7 +8,7 @@ import java.text.DecimalFormat
  */
 object NumberUtils {
 
-    fun toInt(s: String): Int {
+    fun toInt(s: String?): Int {
         try {
             return Integer.parseInt(s)
         } catch (e: Exception) {
@@ -18,7 +18,7 @@ object NumberUtils {
         return 0
     }
 
-    fun toLong(s: String): Long {
+    fun toLong(s: String?): Long {
         try {
             return java.lang.Long.parseLong(s)
         } catch (e: Exception) {
@@ -28,7 +28,7 @@ object NumberUtils {
         return 0L
     }
 
-    fun toFloat(s: String): Float {
+    fun toFloat(s: String?): Float {
         try {
             return java.lang.Float.parseFloat(s)
         } catch (e: Exception) {
@@ -38,7 +38,7 @@ object NumberUtils {
         return 0.0f
     }
 
-    fun toDouble(s: String): Double {
+    fun toDouble(s: String?): Double {
         try {
             return java.lang.Double.parseDouble(s)
         } catch (e: Exception) {
@@ -48,7 +48,7 @@ object NumberUtils {
         return 0.0
     }
 
-    fun toBoolean(s: String): Boolean {
+    fun toBoolean(s: String?): Boolean {
         try {
             return java.lang.Boolean.parseBoolean(s)
         } catch (e: Exception) {
@@ -84,7 +84,7 @@ fun formatPhoneNumber(phoneNumber: String): String {
         val validPhoneNumber = StringBuilder()
         val phoneNumChar = phoneNumber.toCharArray()
         for (c in phoneNumChar) {
-            if (c >= '0' && c <= '9') {
+            if (c in '0'..'9') {
                 validPhoneNumber.append(c)
             }
         }
