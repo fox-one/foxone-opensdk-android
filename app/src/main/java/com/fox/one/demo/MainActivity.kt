@@ -1,7 +1,9 @@
 package com.fox.one.demo
 
+import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.Button
 import com.fox.one.cloud.operation.OperationAPI
 import com.fox.one.cloud.operation.model.HomeInfo
@@ -17,6 +19,7 @@ import com.fox.one.support.common.concurrent.Task
 import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
+import com.fox.one.support.common.utils.NumberUtils
 import com.fox.one.support.framework.network.HttpEngine
 import com.fox.one.support.framework.network.HttpErrorHandler
 import com.foxone.exchange.ex.ExModule
@@ -27,6 +30,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import java.math.BigDecimal
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.Exception
 
@@ -129,6 +134,12 @@ class MainActivity : AppCompatActivity() {
             string = null
             string!!.length
         }
+
+        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.99999999)}")
+        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.9999999999)}")
+        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-1000000.0)}")
+        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.1234)}")
+        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.12345678)}")
     }
 
     private var subIdOfAllTicker: String = ""

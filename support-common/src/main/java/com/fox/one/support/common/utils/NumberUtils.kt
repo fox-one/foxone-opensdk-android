@@ -77,6 +77,16 @@ object NumberUtils {
     fun toString(d: Double): String {
         return d.toString()
     }
+
+    fun double2Float(double: Double): Float {
+        var tmpDouble = double
+        return if (tmpDouble < 0) {
+            tmpDouble = -double
+            -(Math.floor(tmpDouble * Math.pow(10.0, 7.0)) / Math.pow(10.0, 7.0)).toFloat()
+        } else {
+            (Math.floor(tmpDouble * Math.pow(10.0, 7.0)) / Math.pow(10.0, 7.0)).toFloat()
+        }
+    }
 }
 
 fun formatPhoneNumber(phoneNumber: String): String {

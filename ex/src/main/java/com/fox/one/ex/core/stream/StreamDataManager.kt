@@ -49,7 +49,7 @@ object StreamDataManager {
     @Volatile
     private var state: WebSocketEngine.State = WebSocketEngine.State.IDLE
 
-    private val alignmentCache:HashMap<String?, StreamResponse> = HashMap()
+    private val alignmentCache:MutableMap<String?, StreamResponse> = ConcurrentHashMap()
     private val reqCache: MutableList<String> = CopyOnWriteArrayList<String>()
     private val okHttpClient by lazy {
         return@lazy OkHttpClient.Builder()

@@ -79,6 +79,5 @@
             style="@style/Theme.PrimaryButton"
             android:layout_width="match_parent"
             android:text="制造一个Crash" />
-
     </LinearLayout>
 </ScrollView>
