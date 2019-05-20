@@ -14,7 +14,7 @@ import java.io.Serializable
 class StreamResponse: Serializable {
 
     @SerializedName("e")
-    var event: String? = null
+    var event: String? = ""
 
     @SerializedName("ts")
     var timeInSecond: Long = 0L

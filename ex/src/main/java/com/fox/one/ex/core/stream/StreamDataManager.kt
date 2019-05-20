@@ -3,6 +3,7 @@ package com.fox.one.ex.core.stream
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.text.TextUtils
 import com.fox.one.ex.core.stream.model.*
 import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
@@ -49,7 +50,7 @@ object StreamDataManager {
     @Volatile
     private var state: WebSocketEngine.State = WebSocketEngine.State.IDLE
 
-    private val alignmentCache:MutableMap<String?, StreamResponse> = ConcurrentHashMap()
+    private val alignmentCache:ConcurrentHashMap<String?, StreamResponse> = ConcurrentHashMap()
     private val reqCache: MutableList<String> = CopyOnWriteArrayList<String>()
     private val okHttpClient by lazy {
         return@lazy OkHttpClient.Builder()
@@ -75,7 +76,7 @@ object StreamDataManager {
                 TaskScheduler.execute {
                     val byteArray = it.toByteArray().unGzip()
                     val jsonString = byteArray.toString(Charsets.UTF_8)
-                    LogUtils.i(TAG, "ByteString:: $jsonString")
+                    LogUtils.i(TAG, "String:: $jsonString")
                     dispatchMessage(jsonString)
                 }
             }
@@ -114,6 +115,11 @@ object StreamDataManager {
     fun dispatchMessage(message: String) {
         val streamResponse = JsonUtils.optFromJson(message, StreamResponse::class.java)
         streamResponse?.let {
+            LogUtils.i("liuxiaoming", "StreamDataManager::${JsonUtils.optToJson(it)}")
+            if (TextUtils.isEmpty(it.event)) {
+                return
+            }
+
             alignmentCache[it.event] = it
             if (System.currentTimeMillis() - alignmentTime > ALIGNMENT_DELAY) {
                 handler.post {
