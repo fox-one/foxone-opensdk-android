@@ -31,6 +31,7 @@ class WebSocketEngine(var url: String, var httpClient: OkHttpClient, var webSock
     @Synchronized
     fun close() {
         websocket?.cancel()
+        websocket?.close(1000, "")
         websocket = null
     }
 

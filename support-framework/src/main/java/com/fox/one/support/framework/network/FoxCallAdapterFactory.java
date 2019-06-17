@@ -1,11 +1,15 @@
 package com.fox.one.support.framework.network;
 
+import com.fox.one.support.common.utils.JsonUtils;
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.*;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.util.concurrent.Executor;
 
 
@@ -81,7 +85,8 @@ public class FoxCallAdapterFactory extends CallAdapter.Factory {
                                         if (((BaseResponse) response.body()).isSuccessful()) {
                                             callback.onResponse(call, response);
                                         } else {
-                                            callback.onFailure(call, new HttpException(response));
+                                            Response rsp = Response.error(HttpURLConnection.HTTP_INTERNAL_ERROR, ResponseBody.create(MediaType.parse("application/json"), JsonUtils.optToJson(response.body())));
+                                            callback.onFailure(call, new HttpException(rsp));
                                         }
                                     } else {
                                         callback.onResponse(call, response);
