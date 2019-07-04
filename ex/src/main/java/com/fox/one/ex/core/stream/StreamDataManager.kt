@@ -52,11 +52,6 @@ object StreamDataManager {
 
     private val alignmentCache:ConcurrentHashMap<String?, StreamResponse> = ConcurrentHashMap()
     private val reqCache: MutableList<String> = CopyOnWriteArrayList<String>()
-    private val okHttpClient by lazy {
-        return@lazy OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-    }
 
     var webSocketListener = object: WebSocketListener() {
         override fun onOpen(webSocket: WebSocket, response: Response) {
@@ -105,9 +100,8 @@ object StreamDataManager {
     }
 
     init {
-        apiLoader.setOkHttp(okHttpClient)
         apiLoader.setBaseUri(APILoader.BaseUrl(ALPHA_URL, BETA_URL, RELEASE_URL))
-        webSocketEngine = WebSocketEngine(getRealUrl(), okHttpClient, webSocketListener)
+        webSocketEngine = WebSocketEngine(getRealUrl(), apiLoader.getHttpClient(), webSocketListener)
 
         LogUtils.i("foxone", "websocket: ${getRealUrl()}")
     }
@@ -226,7 +220,7 @@ object StreamDataManager {
 
     fun reset() {
         close()
-        webSocketEngine = WebSocketEngine(getRealUrl(), okHttpClient, webSocketListener)
+        webSocketEngine = WebSocketEngine(getRealUrl(), apiLoader.getHttpClient(), webSocketListener)
     }
 
     private fun close() {

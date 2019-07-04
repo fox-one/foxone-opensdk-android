@@ -24,12 +24,6 @@ object CurrencyRateManager: CurrencyRateServerFramework() {
 
     fun init(application: Application) {
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpEngine.defaultInterceptor)
-            .build()
-
-        apiLoader.setOkHttp(okHttpClient)
-
         apiLoader.setBaseUri(
             APILoader.BaseUrl(
                 "https://dev-gateway.fox.one",

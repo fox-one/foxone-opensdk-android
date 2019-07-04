@@ -39,15 +39,8 @@ interface CloudAPI {
                 .getPairs()
         }
 
-        var apiLoader = APILoader()
-
-        init {
-            val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(HttpEngine.defaultInterceptor)
-                .build()
-
-            apiLoader.setOkHttp(okHttpClient)
-            apiLoader.setBaseUri(APILoader.BaseUrl(ExFavAPI.ALPHA_URL, ExFavAPI.BETA_URL, ExFavAPI.RELEASE_URL))
+        val apiLoader = APILoader().apply {
+            this.setBaseUri(APILoader.BaseUrl(ExFavAPI.ALPHA_URL, ExFavAPI.BETA_URL, ExFavAPI.RELEASE_URL))
         }
     }
 }

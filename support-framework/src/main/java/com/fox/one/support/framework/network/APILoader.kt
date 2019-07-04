@@ -89,13 +89,17 @@ class APILoader {
         }
     }
 
-    private fun getHttpClient(): OkHttpClient {
+    fun getHttpClient(): OkHttpClient {
         httpEngine.debugable(FoxRuntime.debug)
         return httpEngine.okHttpClient
     }
 
-    fun setOkHttp(okHttpClient: OkHttpClient) {
-        httpEngine.okHttpClient = okHttpClient
+    fun setHttpEngine(httpEngine: HttpEngine) {
+        this.httpEngine = httpEngine
+    }
+
+    fun getHttpEngine(): HttpEngine {
+        return this.httpEngine
     }
 
     companion object {
