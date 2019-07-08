@@ -15,6 +15,7 @@
         <!-- 还可以加入一些弹出和退出的动画 (lan)-->
     </style>
     <style name="CustomMaterialDialog" parent="Base.V14.ThemeOverlay.MaterialComponents.Dialog.Alert"/>
+
     <style name="Animation_Activity">
         <item name="android:activityOpenEnterAnimation">@anim/translate_right_to_center</item>
         <item name="android:activityOpenExitAnimation">@anim/translate_center_to_left</item>

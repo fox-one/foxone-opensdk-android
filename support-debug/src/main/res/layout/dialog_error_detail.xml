@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e0e0e0"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#1d2023"
+            android:text="@string/customactivityoncrash_error_activity_error_details"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="400dp"
+            android:layout_marginTop="10dp">
+        <TextView
+                android:id="@+id/txt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#1D2023"
+                android:text="asdfasdfasdfasdfasdfsa"/>
+    </ScrollView>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+            android:orientation="horizontal"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="10dp">
+        <Button
+                android:id="@+id/btn_copy"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#474957"
+                android:textColor="#e0e0e0"
+                android:text="@string/customactivityoncrash_error_activity_error_details_copy"/>
+        <Button
+                android:id="@+id/btn_report"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#474957"
+                android:textColor="#e0e0e0"
+                android:text="@string/error_report"/>
+        <Button
+                android:id="@+id/btn_close"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#474957"
+                android:textColor="#e0e0e0"
+                android:text="@string/customactivityoncrash_error_activity_error_details_close"/>
+    </LinearLayout>
+
+</LinearLayout>

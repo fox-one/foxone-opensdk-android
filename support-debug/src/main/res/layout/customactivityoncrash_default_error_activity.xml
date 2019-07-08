@@ -38,18 +38,18 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/customactivityoncrash_error_activity_restart_button"
+                android:id="@+id/customactivityoncrash_error_activity_more_info_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/customactivityoncrash_activity_vertical_margin"
-                android:text="@string/customactivityoncrash_error_activity_close_app" />
+                android:text="@string/customactivityoncrash_error_activity_error_details" />
 
             <Button
-                android:id="@+id/customactivityoncrash_error_activity_more_info_button"
+                android:id="@+id/customactivityoncrash_error_activity_restart_button"
                 style="?borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/customactivityoncrash_error_activity_error_details"
+                android:text="@string/customactivityoncrash_error_activity_close_app"
                 android:textColor="?colorPrimary" />
         </LinearLayout>
     </ScrollView>

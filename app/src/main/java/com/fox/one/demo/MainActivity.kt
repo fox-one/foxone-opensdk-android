@@ -130,16 +130,45 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_make_a_crash).setOnClickListener {
-            var string: String? = ""
-            string = null
-            string!!.length
+            throw NullPointerException("asdfasdfasdfasdfasdfasdn\nasfasdgfasfdasdfasd\nasfagsdfgsdgf\nrasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\nasdfasdfasdfasdfasdfasdn\n" +
+                    "asfasdgfasfdasdfasd\n" +
+                    "asfagsdfgsdgf\n" +
+                    "rasfasfdasfdaf\n")
         }
 
-        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.99999999)}")
-        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.9999999999)}")
-        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-1000000.0)}")
-        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.1234)}")
-        LogUtils.i("liuxiaoming", "${NumberUtils.double2Float(-0.12345678)}")
     }
 
     private var subIdOfAllTicker: String = ""

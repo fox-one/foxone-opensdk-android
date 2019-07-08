@@ -2,21 +2,27 @@ package com.fox.one.support.debug.crash;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.DialogInterface;
+import android.content.*;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.fox.one.support.debug.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.DialogInterface.*;
 
 
 public final class DefaultErrorActivity extends AppCompatActivity {
@@ -69,21 +75,50 @@ public final class DefaultErrorActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //We retrieve all the error data and show it
 
-                    AlertDialog dialog = new AlertDialog.Builder(DefaultErrorActivity.this,R.style.CustomMaterialDialog)
+                    View contentView = LayoutInflater.from(DefaultErrorActivity.this).inflate(R.layout.dialog_error_detail, null);
+                    Button copyButton = contentView.findViewById(R.id.btn_copy);
+                    Button reportButton = contentView.findViewById(R.id.btn_report);
+                    Button closeButton = contentView.findViewById(R.id.btn_close);
+                    TextView contentTxt = contentView.findViewById(R.id.txt_content);
+
+                    contentTxt.setText(CustomActivityOnCrash.getAllErrorDetailsFromIntent(DefaultErrorActivity.this, getIntent()));
+
+                    final AlertDialog dialog = new AlertDialog.Builder(DefaultErrorActivity.this)
                             .setTitle(R.string.customactivityoncrash_error_activity_error_details_title)
-                            .setMessage(CustomActivityOnCrash.getAllErrorDetailsFromIntent(DefaultErrorActivity.this, getIntent()))
-                            .setPositiveButton(R.string.customactivityoncrash_error_activity_error_details_close, null)
-                            .setNeutralButton(R.string.customactivityoncrash_error_activity_error_details_copy,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            copyErrorToClipboard();
-                                            Toast.makeText(DefaultErrorActivity.this, R.string.customactivityoncrash_error_activity_error_details_copied, Toast.LENGTH_SHORT).show();
-                                        }
-                                    })
-                            .show();
-                    TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.customactivityoncrash_error_activity_error_details_text_size));
+                            .setCustomTitle(contentView)
+                            .create();
+
+                    copyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            copyErrorToClipboard();
+                            Toast.makeText(DefaultErrorActivity.this, R.string.customactivityoncrash_error_activity_error_details_copied, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    reportButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
+                                String subject = getPackageName() + "." + pi.versionName + "." + pi.versionCode + System.currentTimeMillis();
+                                String[] emails = {"support@fox.zendesk.com"};
+                                sendEmail(subject, CustomActivityOnCrash.getAllErrorDetailsFromIntent(DefaultErrorActivity.this, getIntent()),
+                                        getString(R.string.error_report), emails);
+                            } catch (PackageManager.NameNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    closeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
                 }
             });
         } else {
@@ -104,5 +139,19 @@ public final class DefaultErrorActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(getString(R.string.customactivityoncrash_error_activity_error_details_clipboard_label), errorInformation);
         clipboard.setPrimaryClip(clip);
+    }
+
+    private void sendEmail(String subject, String text, String chooserTitle, String[] emails) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, emails);
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            intent.putExtra(Intent.EXTRA_TEXT, text);
+
+            startActivity(Intent.createChooser(intent, chooserTitle));
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
