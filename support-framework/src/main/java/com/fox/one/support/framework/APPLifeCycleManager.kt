@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.fox.one.support.common.utils.LogUtils
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * class description here
@@ -16,8 +17,8 @@ object APPLifeCycleManager {
     private const val TAG = "APPLifecycleManager"
     private var activeCount = 0
     private var mInForeGround = false
-    private var mActivityList = mutableListOf<Activity>()
-    private var mAppLifecycleCallback = mutableListOf<AppLifecycleCallback>()
+    private var mActivityList = CopyOnWriteArrayList<Activity>()
+    private var mAppLifecycleCallback = CopyOnWriteArrayList<AppLifecycleCallback>()
 
     fun init(application: Application) {
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {

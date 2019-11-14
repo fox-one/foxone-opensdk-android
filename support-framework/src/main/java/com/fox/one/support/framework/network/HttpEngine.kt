@@ -1,6 +1,8 @@
 package com.fox.one.support.framework.network
 
+import com.fox.one.support.framework.FoxRuntime
 import okhttp3.CertificatePinner
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.internal.Util.assertionError
@@ -114,14 +116,22 @@ class HttpEngine {
         }
 
         var defaultInterceptor: Interceptor = Interceptor {
-            return@Interceptor it.proceed(it.request())
+            val newRequestBuilder = it.request().newBuilder()
+            newRequestBuilder.addHeader("User-Agent", System.getProperty("http.agent")?: "")
+            return@Interceptor it.proceed(newRequestBuilder.build())
         }
 
         private var defaultEngine :HttpEngine = HttpEngine()
 
         fun getDefaultEngine(): HttpEngine {
             if (defaultEngine.okHttpClient.interceptors().isEmpty()) {
-                defaultEngine.okHttpClient = defaultEngine.okHttpClient.newBuilder().addInterceptor(defaultInterceptor).build()
+                defaultEngine.okHttpClient = defaultEngine.okHttpClient.newBuilder()
+                    .addInterceptor {
+                        val newRequestBuilder = it.request().newBuilder()
+                        newRequestBuilder.addHeader("User-Agent", System.getProperty("http.agent")?: "")
+                        return@addInterceptor it.proceed(newRequestBuilder.build())
+                    }
+                    .addInterceptor(defaultInterceptor).build()
             }
 
             return defaultEngine
