@@ -20,6 +20,7 @@ import com.fox.one.support.common.concurrent.TaskScheduler
 import com.fox.one.support.common.utils.JsonUtils
 import com.fox.one.support.common.utils.LogUtils
 import com.fox.one.support.common.utils.NumberUtils
+import com.fox.one.support.common.utils.toNumberString
 import com.fox.one.support.framework.network.HttpEngine
 import com.fox.one.support.framework.network.HttpErrorHandler
 import com.foxone.exchange.ex.ExModule
@@ -168,7 +169,6 @@ class MainActivity : AppCompatActivity() {
                     "asfagsdfgsdgf\n" +
                     "rasfasfdasfdaf\n")
         }
-
     }
 
     private var subIdOfAllTicker: String = ""
@@ -178,7 +178,6 @@ class MainActivity : AppCompatActivity() {
         subIdOfAllTicker = UUID.randomUUID().toString()
         StreamDataManager.subscribe(object : AllTickerStreamObserver(AllTickerStreamReqBody(subIdOfAllTicker, StreamAction.SUB.key)) {
             override fun onUpdate(data: AllTickerStreamInfo) {
-                LogUtils.i("foxone", "stream:::${JsonUtils.optToJson(data)}")
             }
         })
     }

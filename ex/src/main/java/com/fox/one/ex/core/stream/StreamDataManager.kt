@@ -109,7 +109,6 @@ object StreamDataManager {
     fun dispatchMessage(message: String) {
         val streamResponse = JsonUtils.optFromJson(message, StreamResponse::class.java)
         streamResponse?.let {
-            LogUtils.i("liuxiaoming", "StreamDataManager::${JsonUtils.optToJson(it)}")
             if (TextUtils.isEmpty(it.event)) {
                 return
             }

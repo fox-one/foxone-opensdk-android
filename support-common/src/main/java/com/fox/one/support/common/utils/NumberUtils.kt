@@ -1,6 +1,8 @@
 package com.fox.one.support.common.utils
 
 import android.text.TextUtils
+import android.text.style.TtsSpan
+import java.math.RoundingMode
 import java.text.DecimalFormat
 
 /**
@@ -123,11 +125,17 @@ fun Double.getRententionString(): String {
 }
 
 fun Double.toSeparatorString(): String {
-    return DecimalFormat.getNumberInstance().apply { maximumFractionDigits = 8 }.format(this)
+    return DecimalFormat.getNumberInstance().apply {
+        maximumFractionDigits = 8
+        roundingMode = RoundingMode.DOWN
+    }.format(this)
 }
 
 fun Double.toNumberString(): String {
-    return DecimalFormat.getNumberInstance().apply { maximumFractionDigits = 8 }.format(this).replace(",", "")
+    return DecimalFormat.getNumberInstance().apply {
+        maximumFractionDigits = 8
+        this.roundingMode = RoundingMode.DOWN
+    }.format(this).replace(",", "")
 }
 
 fun Double.toSIString(): String {
