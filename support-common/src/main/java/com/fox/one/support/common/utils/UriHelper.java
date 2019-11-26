@@ -59,9 +59,10 @@ public class UriHelper {
             else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-
+                Uri contentUri = uri;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                    contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                }
                 return getDataColumn(context, contentUri, null, null);
             }
             // MediaProvider
@@ -125,7 +126,8 @@ public class UriHelper {
                     null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(index);
+                String data = cursor.getString(index);
+                return data;
             }
         } finally {
             if (cursor != null)
