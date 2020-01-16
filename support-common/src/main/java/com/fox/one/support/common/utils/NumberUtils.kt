@@ -1,9 +1,11 @@
 package com.fox.one.support.common.utils
 
 import android.text.TextUtils
-import android.text.style.TtsSpan
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
+import kotlin.math.abs
 
 /**
  * Created by SimonL on 2014/11/05
@@ -40,9 +42,18 @@ object NumberUtils {
         return 0.0f
     }
 
-    fun toDouble(s: String?): Double {
+    fun toDouble(s: String?, locale: Locale? = null, maxFractionDigits: Int = 8): Double {
         try {
-            return java.lang.Double.parseDouble(s)
+            val format = if (locale == null) {
+                NumberFormat.getInstance()
+            } else {
+                NumberFormat.getInstance(locale)
+            }
+            return format.apply {
+                maximumFractionDigits = maxFractionDigits
+            }
+                .parse(s)
+                .toDouble()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -110,7 +121,7 @@ fun formatPhoneNumber(phoneNumber: String): String {
 fun Double.getRentention(): Int {
     var num = Math.abs(this)
     if (num == 0.0) return 2
-    if (num >=100 ) return 2
+    if (num >= 100) return 2
     if (num >= 1 && num < 100) return 4
     var rentention = 3
     while (num < 1) {
@@ -121,21 +132,40 @@ fun Double.getRentention(): Int {
 }
 
 fun Double.getRententionString(): String {
-    return String.format("%." + this.getRentention() + "f", this)
+    return this.toNumberString(this.getRentention())
 }
 
-fun Double.toSeparatorString(): String {
+fun Double.toSeparatorString(fractionDigits: Int = 8): String {
     return DecimalFormat.getNumberInstance().apply {
-        maximumFractionDigits = 8
+        maximumFractionDigits = fractionDigits
         roundingMode = RoundingMode.DOWN
     }.format(this)
 }
 
-fun Double.toNumberString(): String {
+fun Double.toNumberString(fractionDigits: Int = 8, minFractionDigits: Int = 0): String {
     return DecimalFormat.getNumberInstance().apply {
-        maximumFractionDigits = 8
-        this.roundingMode = RoundingMode.DOWN
-    }.format(this).replace(",", "")
+        maximumFractionDigits = fractionDigits
+        roundingMode = RoundingMode.DOWN
+        isGroupingUsed = false
+        minimumFractionDigits = minFractionDigits
+    }.format(this)
+}
+
+fun Double.toLegalString(): String {
+    var num = abs(this) * 100
+    // 0 -> 0.00
+    if (num == 0.0) return toNumberString(2, 2)
+    var rentention = 0
+    while (num < 1) {
+        num *= 10.toDouble()
+        rentention += 1
+    }
+    // 两位以内保留小数点后两位
+    if (rentention == 0) {
+        return toNumberString(2, 2)
+    }
+    // 两位之外保留3位有效数字位
+    return toNumberString(rentention + 4)
 }
 
 fun Double.toSIString(): String {
